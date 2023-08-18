@@ -1,4 +1,8 @@
+export 'package:animated_widgets/widgets/heart_widget.dart';
+export 'package:animated_widgets/animations/page_transition_animation.dart';
+export 'package:animated_widgets/animations/shape_morphing_animation.dart';
 import 'package:flutter/material.dart';
+
 
 class AnimatedWidgets extends StatefulWidget {
   const AnimatedWidgets({Key? key, required this.child}) : super(key: key);
@@ -417,25 +421,174 @@ class _FlipAnimationState extends State<FlipAnimation>
   }
 }
 
+// class PathAnimation extends StatefulWidget {
+//   final Widget child;
+//   final Path path;
+//   final Duration duration;
+//
+//   const PathAnimation({super.key,
+//     required this.child,
+//     required this.path,
+//     this.duration = const Duration(seconds: 3),
+//   });
+//
+//   @override
+//   State<PathAnimation> createState() => _PathAnimationState();
+// }
+//
+// class _PathAnimationState extends State<PathAnimation>
+//     with SingleTickerProviderStateMixin {
+//   late AnimationController _controller;
+//   late Animation<Offset> _animation;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: widget.duration,
+//     );
+//     _animation = Tween<Offset>(
+//       begin: Offset.zero,
+//       end: Offset(1.0, 1.0),
+//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
+//     _controller.forward();
+//   }
+//
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedBuilder(
+//       animation: _animation,
+//       builder: (context, child) {
+//         final dx = widget.path.getBounds().width * _animation.value.dx;
+//         final dy = widget.path.getBounds().height * _animation.value.dy;
+//         return Transform.translate(
+//           offset: Offset(dx, dy),
+//           child: widget.child,
+//         );
+//       },
+//     );
+//   }
+// }
+
+// class PathAnimation extends StatefulWidget {
+//   final Widget child;
+//   final Path path;
+//   final Duration duration;
+//   final bool reversePath;
+//
+//   const PathAnimation({
+//     required this.child,
+//     required this.path,
+//     this.duration = const Duration(seconds: 3),
+//     this.reversePath = false,
+//   });
+//
+//   @override
+//   _PathAnimationState createState() => _PathAnimationState();
+// }
+//
+// class _PathAnimationState extends State<PathAnimation>
+//     with SingleTickerProviderStateMixin {
+//   late AnimationController _controller;
+//   late Animation<double> _animation;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: widget.duration,
+//     );
+//
+//     final pathMetric = widget.path.computeMetrics().single;
+//     final pathLength = pathMetric.length;
+//
+//     if (widget.reversePath) {
+//       _animation = Tween<double>(
+//         begin: 0.0,
+//         end: pathLength,
+//       ).animate(_controller);
+//     } else {
+//       _animation = Tween<double>(
+//         begin: pathLength,
+//         end: 0.0,
+//       ).animate(_controller);
+//     }
+//
+//     _controller.addStatusListener((status) {
+//       if (status == AnimationStatus.completed) {
+//         if (widget.reversePath) {
+//           _controller.reverse();
+//         } else {
+//           _controller.reset();
+//           _controller.forward();
+//         }
+//       } else if (status == AnimationStatus.dismissed && widget.reversePath) {
+//         _controller.forward();
+//       }
+//     });
+//
+//     _controller.forward();
+//   }
+//
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedBuilder(
+//       animation: _animation,
+//       builder: (context, child) {
+//         final pathMetric = widget.path.computeMetrics().single;
+//         final currentPosition = pathMetric.getTangentForOffset(_animation.value)?.position;
+//         return Transform.translate(
+//           offset: Offset(currentPosition?.dx ?? 10, currentPosition?.dy ?? 10),
+//           child: child,
+//         );
+//       },
+//       child: widget.child,
+//     );
+//   }
+// }
+
+enum PathDirection {
+  forward,
+  reverse,
+}
+
 class PathAnimation extends StatefulWidget {
   final Widget child;
   final Path path;
   final Duration duration;
+  final bool reversePath;
+  final PathDirection direction;
 
-  const PathAnimation({super.key,
+  const PathAnimation({
     required this.child,
     required this.path,
     this.duration = const Duration(seconds: 3),
+    this.reversePath = false,
+    this.direction = PathDirection.forward,
   });
 
   @override
-  State<PathAnimation> createState() => _PathAnimationState();
+  _PathAnimationState createState() => _PathAnimationState();
 }
 
 class _PathAnimationState extends State<PathAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<Offset> _animation;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -444,10 +597,46 @@ class _PathAnimationState extends State<PathAnimation>
       vsync: this,
       duration: widget.duration,
     );
-    _animation = Tween<Offset>(
-      begin: Offset.zero,
-      end: Offset(1.0, 1.0),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
+
+    final pathMetric = widget.path.computeMetrics().single;
+    final pathLength = pathMetric.length;
+
+    double startValue;
+    double endValue;
+
+    if (widget.direction == PathDirection.forward) {
+      startValue = 0.0;
+      endValue = pathLength;
+    } else {
+      startValue = pathLength;
+      endValue = 0.0;
+    }
+
+    if (widget.reversePath) {
+      _animation = Tween<double>(
+        begin: startValue,
+        end: endValue,
+      ).animate(_controller);
+    } else {
+      _animation = Tween<double>(
+        begin: endValue,
+        end: startValue,
+      ).animate(_controller);
+    }
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        if (widget.reversePath) {
+          _controller.reverse();
+        } else {
+          _controller.reset();
+          _controller.forward();
+        }
+      } else if (status == AnimationStatus.dismissed && widget.reversePath) {
+        _controller.forward();
+      }
+    });
+
     _controller.forward();
   }
 
@@ -462,29 +651,33 @@ class _PathAnimationState extends State<PathAnimation>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
-        final dx = widget.path.getBounds().width * _animation.value.dx;
-        final dy = widget.path.getBounds().height * _animation.value.dy;
+        final pathMetric = widget.path.computeMetrics().single;
+        final currentPosition = pathMetric.getTangentForOffset(_animation.value)!.position;
         return Transform.translate(
-          offset: Offset(dx, dy),
-          child: widget.child,
+          offset: Offset(currentPosition.dx, currentPosition.dy),
+          child: child,
         );
       },
+      child: widget.child,
     );
   }
 }
+
 class ColorChangeAnimation extends StatefulWidget {
   final Widget child;
   final Color beginColor;
   final Duration duration;
+  final ValueChanged<Color>? currentAnimationColor;
 
-  const ColorChangeAnimation({
+
+  const ColorChangeAnimation({super.key,
     required this.child,
     this.beginColor = Colors.transparent,
-    this.duration = const Duration(milliseconds: 500),
+    this.duration = const Duration(milliseconds: 500), this.currentAnimationColor,
   });
 
   @override
-  _ColorChangeAnimationState createState() => _ColorChangeAnimationState();
+  State<ColorChangeAnimation> createState() => _ColorChangeAnimationState();
 }
 
 class _ColorChangeAnimationState extends State<ColorChangeAnimation>
@@ -492,6 +685,7 @@ class _ColorChangeAnimationState extends State<ColorChangeAnimation>
   late AnimationController _controller;
   late Animation<Color?> _animation;
   late Color currentColor;
+  ValueChanged<Color>? currentAnimationColor;
 
   @override
   void initState() {
@@ -506,15 +700,6 @@ class _ColorChangeAnimationState extends State<ColorChangeAnimation>
       begin: widget.beginColor,
       end: Colors.blue,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-
-    // Start the animation immediately after initialization
-    // _controller.forward();
-
-    // _animation.addListener(() {
-    //   setState(() {
-    //     currentColor = _animation.value!;
-    //   });
-    // });
     _controller.addStatusListener((status) {
       setState(() {
         if (status == AnimationStatus.completed) {
@@ -526,7 +711,6 @@ class _ColorChangeAnimationState extends State<ColorChangeAnimation>
         }
       });
     });
-
     _controller.forward();
   }
 
@@ -544,27 +728,28 @@ class _ColorChangeAnimationState extends State<ColorChangeAnimation>
         return Container(
           width: 150,
           height: 150,
-          color: currentColor,
+          // color: currentColor,
           child: widget.child,
         );
       },
     );
   }
 }
-class EaseOutBounceAnimation extends StatefulWidget {
+class FastOutSlowInAnimation extends StatefulWidget {
   final Widget child;
   final Duration duration;
+  final double? scale;
 
-  const EaseOutBounceAnimation({
+  const FastOutSlowInAnimation({super.key,
     required this.child,
-    this.duration = const Duration(seconds: 1),
+    this.duration = const Duration(seconds: 1), this.scale,
   });
 
   @override
-  _EaseOutBounceAnimationState createState() => _EaseOutBounceAnimationState();
+  State<FastOutSlowInAnimation> createState() => _FastOutSlowInAnimationState();
 }
 
-class _EaseOutBounceAnimationState extends State<EaseOutBounceAnimation>
+class _FastOutSlowInAnimationState extends State<FastOutSlowInAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -603,7 +788,149 @@ class _EaseOutBounceAnimationState extends State<EaseOutBounceAnimation>
         animation: _animation,
         builder: (context, child) {
           return Transform.scale(
-            scale: 1 + _animation.value * 0.3, // Adjust the scale factor
+            scale: 1 + _animation.value * (widget.scale ??0.9), // Adjust the scale factor
+            child: child,
+          );
+        },
+        child: widget.child,
+      ),
+    );
+  }
+}
+class ScaleAnimation extends StatefulWidget {
+  final Widget child;
+  final double startScale;
+  final double endScale;
+  final Duration duration;
+
+  const ScaleAnimation({
+    required this.child,
+    this.startScale = 1.0,
+    this.endScale = 1.5,
+    this.duration = const Duration(seconds: 1),
+  });
+
+  @override
+  _ScaleAnimationState createState() => _ScaleAnimationState();
+}
+
+class _ScaleAnimationState extends State<ScaleAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _animation = Tween<double>(
+      begin: widget.startScale,
+      end: widget.endScale,
+    ).animate(_controller);
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reset();
+        _controller.forward();
+      }
+    });
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, child) {
+        return Transform.scale(
+          scale: _animation.value,
+          child: widget.child,
+        );
+      },
+    );
+  }
+}
+class ParallaxAnimation extends StatelessWidget {
+  final double xOffset;
+  final double yOffset;
+  final Widget child;
+
+  const ParallaxAnimation({
+    required this.xOffset,
+    required this.yOffset,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: Offset(xOffset, yOffset),
+      child: child,
+    );
+  }
+}
+class GestureAnimation extends StatefulWidget {
+  final Widget child;
+  final GestureTapCallback onTap;
+
+  const GestureAnimation({
+    required this.child,
+    required this.onTap,
+  });
+
+  @override
+  _GestureAnimationState createState() => _GestureAnimationState();
+}
+
+class _GestureAnimationState extends State<GestureAnimation>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        _controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _controller.forward();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        widget.onTap();
+        _controller.forward();
+      },
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: 1.0 + (_controller.value * 0.2),
             child: child,
           );
         },
