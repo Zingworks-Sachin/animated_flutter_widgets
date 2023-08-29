@@ -95,7 +95,7 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
           imagePath: 'assets/images/walkfor1min.png',
           initialColor: Colors.blue,
           targetColor: Colors.green,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
         ),
       ),
       ShakeAnimationWidget(
