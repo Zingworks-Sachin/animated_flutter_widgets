@@ -1,5 +1,6 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:example/second_page.dart';
+import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 
 class AnimationExampleWidget extends StatefulWidget {
@@ -21,33 +22,30 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
     // TODO: implement initState
     super.initState();
     widgetList = [
-      // ParallaxAnimation(
-      //   xOffset: 50,
-      //   yOffset: -50,
-      //   child: Container(
-      //     width: 100,
-      //     height: 100,
-      //     color: Colors.cyan,
-      //   ),
-      // ),
       FastOutSlowInAnimation(
         duration: const Duration(seconds: 2),
-        scale: 1.0,
+        scale: 0.75,
         child: Container(
           width: 100,
           height: 100,
-          color: Colors.redAccent,
+          color: ColorUtility.magenta,
           child: const Center(child: Text("Fast Out Slow In",style: TextStyle(fontSize: 8.0),)),
         ),
       ),
       RotationAnimationWidget(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorUtility.magenta
+          ),
           onPressed: () {},
           child: const Text('Rotation Animation'),
         ),
       ),
       EaseInAnimationWidget(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorUtility.magenta
+          ),
           onPressed: () {},
           child: const Text('Fade In Animation'),
         ),
@@ -55,44 +53,29 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
       SlideInAnimationWidget(
         duration: const Duration(seconds: 1),
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorUtility.magenta
+          ),
           onPressed: () {},
           child: const Text('Slide In Animation'),
         ),
       ),
-      // GestureAnimation(
-      //   child: Container(
-      //     width: 100,
-      //     height: 100,
-      //     color: Colors.pink,
-      //     child: Text("Click Me"),
-      //   ),
-      //   onTap: () {
-      //     print('Container Tapped');
-      //   },
-      // ),
       BounceAnimationWidget(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorUtility.magenta
+          ),
           onPressed: () {},
           child: const Text('Bounce Animation'),
         ),
       ),
-      const PulseAnimation(
+       PulseAnimation(
         child: HeartShape(
           width: 100,
           height: 100,
-          color: Colors.redAccent,
+          color: ColorUtility.magenta,
         ),
       ),
-      // ScaleAnimation(
-      //   startScale: 1.0,
-      //   endScale: 1.5,
-      //   duration: const Duration(seconds: 2),
-      //   child: Container(
-      //     width: 50,
-      //     height: 50,
-      //     color: Colors.yellow,
-      //   ),
-      // ),
       PathAnimation(
         reversePath: true,
         path: Path()
@@ -102,52 +85,41 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
           ..lineTo(0, 200)
           ..close(),
         duration: const Duration(seconds: 4),
-        child: const CircleAvatar(
+        child:  CircleAvatar(
           radius: 20,
-          backgroundColor: Colors.green,
+          backgroundColor: ColorUtility.magenta,
         ),
       ),
-
-      ColorChangeAnimation(
-        beginColor: Colors.red,
-        duration: const Duration(seconds: 2),
-        currentAnimationColor: (currentAnimationColor) {
-          setState(() {
-            currentColor = currentAnimationColor;
-          });
-          print("currentColor=>$currentColor");
-        },
-        child: ColorFiltered(
-            colorFilter:
-            ColorFilter.mode(currentColor.withOpacity(0.7), BlendMode.color),child: Image.asset("assets/images/walkfor1min.png",)),
+      Container(
+        child: ImageColorChangeAnimationUtility.animatedColorImage(
+          imagePath: 'assets/images/walkfor1min.png',
+          initialColor: Colors.blue,
+          targetColor: Colors.green,
+          duration: Duration(seconds: 1),
+        ),
       ),
       ShakeAnimationWidget(
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: ColorUtility.magenta
+          ),
           onPressed: () {},
           child: const Text('Shake Animation'),
         ),
       ),
-      const FlipAnimation(
+       FlipAnimation(
+        isFlipped: false,
         frontChild: CircleAvatar(
           radius: 40,
-          backgroundColor: Colors.blue,
-          child: Icon(Icons.arrow_forward, color: Colors.white,),
+          backgroundColor: ColorUtility.blueGrey,
+          child: const Icon(Icons.arrow_forward, color: Colors.white,),
         ),
-        backChild: CircleAvatar(
+        backChild:  CircleAvatar(
           radius: 40,
-          backgroundColor: Colors.red,
-          child: Icon(Icons.arrow_back, color: Colors.white),
+          backgroundColor: ColorUtility.magenta,
+          child: const Icon(Icons.arrow_back, color: Colors.white),
         ),
-        duration: Duration(seconds: 1),
-      ),
-      ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            RotationAnimation(page: const SecondPage(), isClockwise: true),
-          );
-        },
-        child: const Text('Page Transition Animation'),
+        duration: const Duration(seconds: 1),
       ),
       const ShapeMorphingAnimation(
         shapes: [
@@ -159,13 +131,12 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
       )
     ];
     setState(() {
-
     });
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Animation Example')),
+      appBar: AppBar(title: const Text('Animation Example'),backgroundColor: ColorUtility.magenta,),
       body: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Number of columns

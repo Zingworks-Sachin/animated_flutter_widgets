@@ -1,3 +1,4 @@
+import 'package:example/animations.dart';
 import 'package:example/animations_example.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: AnimationExampleWidget(),
+      home: Animations(),
     );
   }
 }

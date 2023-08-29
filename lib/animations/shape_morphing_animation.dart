@@ -24,10 +24,12 @@ class _ShapeMorphingAnimationState extends State<ShapeMorphingAnimation> {
 
   void _animate() {
     Future.delayed(widget.duration, () {
-      setState(() {
-        _currentIndex = (_currentIndex + 1) % widget.shapes.length;
-        _animate();
-      });
+      if (mounted){
+        setState(() {
+          _currentIndex = (_currentIndex + 1) % widget.shapes.length;
+          _animate();
+        });
+      }
     });
   }
 

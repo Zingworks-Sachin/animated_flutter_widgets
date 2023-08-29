@@ -1,6 +1,8 @@
 export 'package:animated_widgets/widgets/heart_widget.dart';
 export 'package:animated_widgets/animations/page_transition_animation.dart';
 export 'package:animated_widgets/animations/shape_morphing_animation.dart';
+export 'package:animated_widgets/animations/shimmer_animations.dart';
+export 'package:animated_widgets/animations/image_color_change_animation.dart';
 import 'package:flutter/material.dart';
 
 
@@ -96,7 +98,6 @@ class SlideInAnimationWidget extends StatefulWidget {
   @override
   State<SlideInAnimationWidget> createState() => _SlideInAnimationWidgetState();
 }
-
 class _SlideInAnimationWidgetState extends State<SlideInAnimationWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
@@ -130,6 +131,114 @@ class _SlideInAnimationWidgetState extends State<SlideInAnimationWidget>
     );
   }
 }
+
+
+class SlideOutAnimationWidget extends StatefulWidget {
+  final Widget child;
+  final Offset beginOffset;
+  final Duration duration;
+
+  const SlideOutAnimationWidget({super.key,
+    required this.child,
+    this.beginOffset = const Offset(0.0, 1.0),
+    this.duration = const Duration(milliseconds: 500),
+  });
+
+  @override
+  State<SlideOutAnimationWidget> createState() => _SlideOutAnimationWidgetState();
+}
+class _SlideOutAnimationWidgetState extends State<SlideOutAnimationWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    // _controller = AnimationController(
+    //   vsync: this,
+    //   duration: widget.duration,
+    // );
+    // _animation = Tween<Offset>(
+    //   begin: widget.beginOffset,
+    //   end: Offset.zero,
+    // ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    // _controller.forward();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _animation = Tween<Offset>(
+      begin: Offset.zero,
+      end: widget.beginOffset,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _animation,
+      child: widget.child,
+    );
+  }
+}
+
+// class SlideOutAnimationWidget extends StatefulWidget {
+//   final Widget child;
+//   final Offset endOffset;
+//   final Duration duration;
+//
+//   const SlideOutAnimationWidget({
+//     Key? key,
+//     required this.child,
+//     this.endOffset = const Offset(0.0, 1.0),
+//     this.duration = const Duration(milliseconds: 500),
+//   }) : super(key: key);
+//
+//   @override
+//   State<SlideOutAnimationWidget> createState() =>
+//       _SlideOutAnimationWidgetState();
+// }
+// class _SlideOutAnimationWidgetState extends State<SlideOutAnimationWidget>
+//     with SingleTickerProviderStateMixin {
+//   late AnimationController _controller;
+//   late Animation<Offset> _animation;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _controller = AnimationController(
+//       vsync: this,
+//       duration: widget.duration,
+//     );
+//     _animation = Tween<Offset>(
+//       begin: Offset.zero,
+//       end: widget.endOffset,
+//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+//     _controller.forward();
+//   }
+//
+//   @override
+//   void dispose() {
+//     _controller.dispose();
+//     super.dispose();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return SlideTransition(
+//       position: _animation,
+//       child: widget.child,
+//     );
+//   }
+// }
 
 class RotationAnimationWidget extends StatefulWidget {
   final Widget child;
@@ -340,7 +449,7 @@ class FlipAnimation extends StatefulWidget {
   final bool isFlipped;
   final Duration duration;
 
-  const FlipAnimation({
+  const FlipAnimation({super.key,
     required this.frontChild,
     required this.backChild,
     this.isFlipped = false,
@@ -348,7 +457,7 @@ class FlipAnimation extends StatefulWidget {
   });
 
   @override
-  _FlipAnimationState createState() => _FlipAnimationState();
+  State<FlipAnimation> createState() => _FlipAnimationState();
 }
 
 class _FlipAnimationState extends State<FlipAnimation>
@@ -573,7 +682,7 @@ class PathAnimation extends StatefulWidget {
   final bool reversePath;
   final PathDirection direction;
 
-  const PathAnimation({
+  const PathAnimation({super.key,
     required this.child,
     required this.path,
     this.duration = const Duration(seconds: 3),
@@ -803,7 +912,7 @@ class ScaleAnimation extends StatefulWidget {
   final double endScale;
   final Duration duration;
 
-  const ScaleAnimation({
+  const ScaleAnimation({super.key,
     required this.child,
     this.startScale = 1.0,
     this.endScale = 1.5,
@@ -865,7 +974,7 @@ class ParallaxAnimation extends StatelessWidget {
   final double yOffset;
   final Widget child;
 
-  const ParallaxAnimation({
+  const ParallaxAnimation({super.key,
     required this.xOffset,
     required this.yOffset,
     required this.child,
@@ -883,7 +992,7 @@ class GestureAnimation extends StatefulWidget {
   final Widget child;
   final GestureTapCallback onTap;
 
-  const GestureAnimation({
+  const GestureAnimation({super.key,
     required this.child,
     required this.onTap,
   });

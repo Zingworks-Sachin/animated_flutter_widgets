@@ -4,10 +4,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-class PageTransitionAnimation extends PageRouteBuilder {
+class SlideLeftPageAnimation<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  PageTransitionAnimation({required this.page})
+  SlideLeftPageAnimation({required this.page})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -20,26 +20,10 @@ class PageTransitionAnimation extends PageRouteBuilder {
     },
   );
 }
-class SlideLeftPageRoute<T> extends PageRouteBuilder<T> {
+class FadePageAnimation<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  SlideLeftPageRoute({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = const Offset(1.0, 0.0);
-      var end = Offset.zero;
-      var curve = Curves.easeInOut;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      var offsetAnimation = animation.drive(tween);
-      return SlideTransition(position: offsetAnimation, child: child);
-    },
-  );
-}
-class FadePageRoute<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  FadePageRoute({required this.page})
+  FadePageAnimation({required this.page})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -84,48 +68,6 @@ class RotationPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-// class CustomPageTransition<T> extends PageRouteBuilder<T> {
-//   final Widget page;
-//
-//   CustomPageTransition({required this.page})
-//       : super(
-//     pageBuilder: (context, animation, secondaryAnimation) => page,
-//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-//       const begin = Offset(1.0, 0.0);
-//       const end = Offset.zero;
-//       const curve = Curves.easeInOut;
-//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-//       var offsetAnimation = animation.drive(tween);
-//
-//       const rotationMaxDegrees = 30.0; // Adjust the maximum rotation angle as desired
-//       final rotationAnimation = Tween<double>(
-//         begin: -rotationMaxDegrees,
-//         end: 0.0,
-//       ).animate(animation);
-//
-//       const initialScale = 0.8; // Adjust the initial scale factor as desired
-//       const endScale = 1.0;
-//       final scaleAnimation = Tween<double>(
-//         begin: initialScale,
-//         end: endScale,
-//       ).animate(animation);
-//
-//       return Transform.scale(
-//         scale: scaleAnimation.value,
-//         child: Transform.rotate(
-//           angle: rotationAnimation.value * (math.pi / 180),
-//           alignment: Alignment.centerRight,
-//           child: SlideTransition(
-//             position: offsetAnimation,
-//             child: child,
-//           ),
-//         ),
-//       );
-//     },
-//   );
-// }
-
-
 class OpacityScalePageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -211,37 +153,6 @@ class ZoomOutPageTransition<T> extends PageRouteBuilder<T> {
             ),
           ),
         ],
-      );
-    },
-  );
-}
-class FlipDownPageTransition<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  FlipDownPageTransition({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.easeInOut;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      var offsetAnimation = animation.drive(tween);
-
-      final upsideDownRotation = Tween<double>(
-        begin: 0.0,
-        end: math.pi,
-      ).animate(animation);
-
-      return Transform(
-        alignment: Alignment.center,
-        transform: Matrix4.identity()
-          ..setEntry(3, 2, 0.001) // Perspective effect
-          ..rotateX(animation.status == AnimationStatus.forward ? upsideDownRotation.value : 0),
-        child: SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        ),
       );
     },
   );
@@ -382,26 +293,6 @@ class RipplePageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class ElasticBouncePageTransition<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  ElasticBouncePageTransition({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
-      const end = Offset.zero;
-      const curve = Curves.elasticInOut; // Use elastic curve for bounce effect
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      final offsetAnimation = animation.drive(tween);
-
-      return Transform.translate(
-        offset: offsetAnimation.value,
-        child: child,
-      );
-    },
-  );
-}
 class SwingPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -431,31 +322,6 @@ class SwingPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class RadialPageTransition<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  RadialPageTransition({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.easeInOut;
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      final offsetAnimation = animation.drive(tween);
-
-      final revealFraction = animation.value; // Fraction of reveal progress
-
-      return ClipOval(
-        clipper: RadialClipper(revealFraction),
-        child: SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        ),
-      );
-    },
-  );
-}
 class RadialClipper extends CustomClipper<Rect> {
   final double revealFraction;
 
@@ -473,10 +339,10 @@ class RadialClipper extends CustomClipper<Rect> {
     return true;
   }
 }
-class PopAndScaleAnimation<T> extends PageRouteBuilder<T> {
+class PopAndScaleTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  PopAndScaleAnimation({required this.page})
+  PopAndScaleTransition({required this.page})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -519,10 +385,10 @@ class PopAndScaleAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class ShrinkAndFadeAnimation<T> extends PageRouteBuilder<T> {
+class ShrinkAndFadeTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  ShrinkAndFadeAnimation({required this.page})
+  ShrinkAndFadeTransition({required this.page})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -555,10 +421,10 @@ class ShrinkAndFadeAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class ElasticRotationAnimation<T> extends PageRouteBuilder<T> {
+class ElasticRotationTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
-  ElasticRotationAnimation({required this.page})
+  ElasticRotationTransition({required this.page})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -591,45 +457,17 @@ class ElasticRotationAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class SwingRotationAnimation<T> extends PageRouteBuilder<T> {
-  final Widget page;
-
-  SwingRotationAnimation({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final begin = const Offset(0.0, 1.0);
-      final end = Offset.zero;
-      final curve = Curves.easeInOut;
-      final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-      final offsetAnimation = animation.drive(tween);
-
-      final rotationValue = Tween<double>(
-        begin: -0.2,
-        end: 0.2,
-      ).animate(animation);
-
-      return RotationTransition(
-        turns: AlwaysStoppedAnimation(rotationValue.value),
-        child: SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        ),
-      );
-    },
-  );
-}
-class FlippingRotationAnimation<T> extends PageRouteBuilder<T> {
+class FlippingRotationTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
   final bool isReversed;
 
-  FlippingRotationAnimation({required this.page, required this.isReversed})
+  FlippingRotationTransition({required this.page, required this.isReversed})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final begin = isReversed ? Offset(0.0, -1.0) : Offset(0.0, 1.0);
-      final end = Offset.zero;
-      final curve = Curves.easeInOut;
+      final begin = isReversed ? const Offset(0.0, -1.0) : const Offset(0.0, 1.0);
+      const end = Offset.zero;
+      const curve = Curves.easeInOut;
       final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
       final offsetAnimation = animation.drive(tween);
 
@@ -659,22 +497,22 @@ class FlippingRotationAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class ScaleSlideAnimation<T> extends PageRouteBuilder<T> {
+class ScaleSlideTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
-  final bool isScaledIn;
+  final bool isLeftScaled;
 
-  ScaleSlideAnimation({required this.page, required this.isScaledIn})
+  ScaleSlideTransition({required this.page, required this.isLeftScaled})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final begin = isScaledIn ? Offset(1.0, 0.0) : Offset(-1.0, 0.0);
-      final end = Offset.zero;
-      final curve = Curves.easeInOut;
+      final begin = isLeftScaled ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0);
+      const end = Offset.zero;
+      const curve = Curves.easeInOut;
       final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
       final offsetAnimation = animation.drive(tween);
 
       final scaleValue = Tween<double>(
-        begin: isScaledIn ? 0.8 : 1.2,
+        begin: isLeftScaled ? 0.8 : 1.2,
         end: 1.0,
       ).animate(animation);
 
@@ -687,32 +525,6 @@ class ScaleSlideAnimation<T> extends PageRouteBuilder<T> {
               position: offsetAnimation,
               child: child,
             ),
-          );
-        },
-        child: child,
-      );
-    },
-  );
-}
-class OpacityAnimation<T> extends PageRouteBuilder<T> {
-  final Widget page;
-  // final bool isFadingIn;
-
-  OpacityAnimation({required this.page})
-      : super(
-    pageBuilder: (context, animation, secondaryAnimation) => page,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final opacityValue = Tween<double>(
-        begin: 0.0,
-        end:  1.0,
-      ).animate(animation);
-
-      return AnimatedBuilder(
-        animation: animation,
-        builder: (context, child) {
-          return Opacity(
-            opacity: opacityValue.value,
-            child: child,
           );
         },
         child: child,
