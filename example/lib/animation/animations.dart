@@ -1,6 +1,7 @@
 import 'package:animated_widgets/animated_widgets.dart';
-import 'package:example/animations_example.dart';
-import 'package:example/page_transition_animations.dart';
+import 'package:example/animation/animation_catlog.dart';
+import 'package:example/animation/animations_example.dart';
+import 'package:example/page_transition/page_transition_animations.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class Animations extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    PopAndScaleTransition(page: const AnimationExampleWidget()),
+                    PopAndScaleTransition(page: const AnimationCatlog()),
                   );
                 },
                 child: const Text('Animations',style: TextStyle(color: Colors.white),),
@@ -49,16 +50,6 @@ class Animations extends StatelessWidget {
           ),
         ],
       ),
-    );
-    return Column(
-      children: [
-        ShimmerAnimation(baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Fade In Animation'),
-          ),)
-      ],
     );
   }
 }

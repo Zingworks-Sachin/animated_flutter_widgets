@@ -4,13 +4,13 @@ class ImageColorChangeAnimationUtility {
   static Widget animatedColorImage({
     required String imagePath,
     required Color initialColor,
-    required Color targetColor,
+    required List<Color> colorArray,
     required Duration duration,
   }) {
     return _ColorChangeAnimationWidget(
       imagePath: imagePath,
       initialColor: initialColor,
-      targetColor: targetColor,
+      colorArray: colorArray,
       duration: duration,
     );
   }
@@ -19,13 +19,13 @@ class ImageColorChangeAnimationUtility {
 class _ColorChangeAnimationWidget extends StatefulWidget {
   final String imagePath;
   final Color initialColor;
-  final Color targetColor;
+  final List<Color> colorArray;
   final Duration duration;
 
   const _ColorChangeAnimationWidget({
     required this.imagePath,
     required this.initialColor,
-    required this.targetColor,
+    required this.colorArray,
     required this.duration,
   });
 
@@ -36,26 +36,32 @@ class _ColorChangeAnimationWidget extends StatefulWidget {
 
 class _ColorChangeAnimationWidgetState
     extends State<_ColorChangeAnimationWidget> {
-  late Color _currentColor;
+  int _currentColorIndex = 0;
   bool _showImage = false;
 
   @override
   void initState() {
     super.initState();
-    _currentColor = widget.initialColor;
+    _startColorChangeLoop();
   }
 
-  void _changeColor() {
-    setState(() {
-      _showImage = !_showImage;
-      _currentColor = _showImage ? widget.targetColor : widget.initialColor;
+  void _startColorChangeLoop() {
+    Future.delayed(widget.duration, () {
+      setState(() {
+        _showImage = !_showImage;
+        _currentColorIndex =
+            (_currentColorIndex + 1) % widget.colorArray.length;
+        _startColorChangeLoop(); // Call the function again after the duration
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    Color currentColor = widget.colorArray[_currentColorIndex];
+
     return GestureDetector(
-      onTap: _changeColor,
+      onTap: () {}, // Empty onTap to prevent accidental taps
       child: AnimatedContainer(
         duration: widget.duration,
         curve: Curves.easeInOut,
@@ -63,7 +69,7 @@ class _ColorChangeAnimationWidgetState
         height: _showImage ? 200 : 0,
         child: ColorFiltered(
           colorFilter: ColorFilter.mode(
-            _currentColor,
+            currentColor,
             BlendMode.color,
           ),
           child: Image.asset(widget.imagePath),

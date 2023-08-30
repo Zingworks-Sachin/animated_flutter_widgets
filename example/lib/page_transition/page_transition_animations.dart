@@ -1,7 +1,9 @@
-import 'package:animated_widgets/animated_widgets.dart';
-import 'package:example/second_page.dart';
+import 'package:animated_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+import 'package:animated_widgets/animations/page_transition_animation.dart';
+import 'package:example/page_transition/second_page.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class PageTransitionAnimationWidget extends StatefulWidget {
 
@@ -221,23 +223,39 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Page Transition Example'),backgroundColor: ColorUtility.magenta,),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // Number of columns
-          crossAxisSpacing: 10.0, // Spacing between columns
-          mainAxisSpacing: 10.0, // Spacing between rows
-        ),
-        itemCount: widgetList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return  Padding(
-            padding: const EdgeInsets.only(top:10.0),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ShakeAnimationWidget(child: widgetList[index]),
+      // appBar: AppBar(title: const Text('Page Transition Example'),backgroundColor: ColorUtility.magenta,),
+      appBar: SlideInAnimatedAppBar(
+        title: const Text('Page Transition Catlog'),
+        animationDuration: 1000,
+        backgroundColor: ColorUtility.magenta,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: AnimationLimiter(
+          child: GridView.builder(
+            shrinkWrap: true,
+            // physics: const NeverScrollableScrollPhysics(),
+            itemCount:  widgetList.length,
+            gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              // childAspectRatio: 0.76,
+              crossAxisSpacing: 18,
+              mainAxisSpacing: 12,
             ),
-          );
-        },
+            itemBuilder: (_, index) =>
+                AnimationConfiguration.staggeredGrid(
+                  position: index,
+                  duration: const Duration(milliseconds: 600),
+                  columnCount: 2,
+                  child: ScaleAnimation(
+                      child: FadeInAnimation(
+                          child: widgetList[index]
+                      )
+                  ),
+                ),
+          ),
+        ),
       ),
     );
   }

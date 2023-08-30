@@ -1,8 +1,12 @@
 export 'package:animated_widgets/widgets/heart_widget.dart';
 export 'package:animated_widgets/animations/page_transition_animation.dart';
-export 'package:animated_widgets/animations/shape_morphing_animation.dart';
+export 'package:animated_widgets/animations/droplet_wrapper.dart';
 export 'package:animated_widgets/animations/shimmer_animations.dart';
 export 'package:animated_widgets/animations/image_color_change_animation.dart';
+export 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
+export 'package:animated_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+export 'package:animated_widgets/animated_widgets/appbars/color_animated_appbar.dart';
+export 'package:animated_widgets/widgets/water_droplet.dart';
 import 'package:flutter/material.dart';
 
 
