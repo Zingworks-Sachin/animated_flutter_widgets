@@ -47,12 +47,14 @@ class _ColorChangeAnimationWidgetState
 
   void _startColorChangeLoop() {
     Future.delayed(widget.duration, () {
-      setState(() {
-        _showImage = !_showImage;
-        _currentColorIndex =
-            (_currentColorIndex + 1) % widget.colorArray.length;
-        _startColorChangeLoop(); // Call the function again after the duration
-      });
+      if (mounted){
+        setState(() {
+          _showImage = !_showImage;
+          _currentColorIndex =
+              (_currentColorIndex + 1) % widget.colorArray.length;
+          _startColorChangeLoop(); // Call the function again after the duration
+        });
+      }
     });
   }
 

@@ -1,26 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class ScrollFadeAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final double maxHeight;
-  final Widget? title;
+class AppBarAnimation extends StatefulWidget {
+  final PreferredSizeWidget appBar;
+  final Widget child;
 
-  ScrollFadeAppBar({
-    Key? key,
-    this.maxHeight = kToolbarHeight,
-    this.title,
-  }) : super(key: key);
+  AppBarAnimation({required this.appBar, required this.child});
 
   @override
-  _ScrollFadeAppBarState createState() => _ScrollFadeAppBarState();
-
-  @override
-  Size get preferredSize {
-    return Size.fromHeight(maxHeight);
-  }
+  _AppBarAnimationState createState() => _AppBarAnimationState();
 }
 
-class _ScrollFadeAppBarState extends State<ScrollFadeAppBar> {
+class _AppBarAnimationState extends State<AppBarAnimation> {
   ScrollController _scrollController = ScrollController();
   bool _isAppBarVisible = true;
 
@@ -44,36 +35,25 @@ class _ScrollFadeAppBarState extends State<ScrollFadeAppBar> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomScrollView(
+        SingleChildScrollView(
           controller: _scrollController,
-          slivers: [
-            SliverAppBar(
-              expandedHeight: widget.maxHeight,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                title: widget.title ?? Text('Default Title'),
+          child: Column(
+            children: [
+              Container(
+                height: widget.appBar.preferredSize.height,
+                child: widget.appBar,
               ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                  return ListTile(title: Text('Item $index'));
-                },
-                childCount: 20,
-              ),
-            ),
-          ],
+              widget.child,
+            ],
+          ),
         ),
         AnimatedOpacity(
           opacity: _isAppBarVisible ? 1.0 : 0.0,
           duration: Duration(milliseconds: 300),
-          child: AppBar(
-            title: widget.title ?? Text('Default Title'),
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-          ),
+          child: widget.appBar,
         ),
       ],
     );
   }
 }
+

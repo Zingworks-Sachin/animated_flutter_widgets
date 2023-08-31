@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class DropletPainter extends CustomPainter {
+class WaterDropletPainter extends CustomPainter {
   final Color? dropColor;
-  DropletPainter({this.dropColor});
+  WaterDropletPainter({this.dropColor});
 
   @override
   void paint(Canvas canvas, Size size) {

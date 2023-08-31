@@ -18,10 +18,10 @@ class SecondPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
+            Icon(
               Icons.star,
               size: 80,
-              color: Colors.orange,
+              color: ColorUtility.magenta,
             ),
             const SizedBox(height: 20),
             const Text(

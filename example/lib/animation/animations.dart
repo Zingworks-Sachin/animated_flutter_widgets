@@ -12,28 +12,13 @@ class Animations extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: ColorUtility.magenta,title: const Text("Animation Widget Example",)),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: SlideInAnimationWidget(
-              duration: const Duration(seconds: 1),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorUtility.magenta
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PopAndScaleTransition(page: const AnimationCatlog()),
-                  );
-                },
-                child: const Text('Animations',style: TextStyle(color: Colors.white),),
-              ),),
-          ),
-          Center(
-            child: SlideInAnimationWidget(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SlideInAnimation(
+              direction: Direction.down,
               duration: const Duration(seconds: 1),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -46,9 +31,26 @@ class Animations extends StatelessWidget {
                   );
                 },
                 child: const Text('Page Transition Animations',style: TextStyle(color: Colors.white),),
-              ),),
-          ),
-        ],
+              ),
+            ),
+            SlideInAnimation(
+              direction: Direction.up,
+              duration: const Duration(seconds: 1),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorUtility.magenta
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PopAndScaleTransition(page: const AnimationCatlog()),
+                  );
+                },
+                child: const Text('Animations',style: TextStyle(color: Colors.white),),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

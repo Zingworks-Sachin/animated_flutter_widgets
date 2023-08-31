@@ -2,6 +2,7 @@ import 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
 import 'package:animated_widgets/animations/page_transition_animation.dart';
 import 'package:example/animation/animations_example.dart';
 import 'package:example/utility/color.dart';
+import 'package:example/utility/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -28,7 +29,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
             onPressed: () {
               Navigator.push(
                 context,
-                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: true,)),
+                PopAndScaleTransition(page:  const AnimationExampleWidget(showContineousAnimations: true, animationType: AnimationType.contineous,)),
               );
             },
             child: const Text('Continuous Animation'),
@@ -40,10 +41,22 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
             onPressed: () {
               Navigator.push(
                 context,
-                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: false,)),
+                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: false,animationType: AnimationType.steady)),
               );
             },
             child: const Text('Steady Animation'),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: ColorUtility.magenta
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: false,animationType: AnimationType.buttonTap)),
+              );
+            },
+            child: const Text('Button Tap Animation'),
           ),
         ];
       });

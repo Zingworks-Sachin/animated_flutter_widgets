@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class DropletWrapper extends StatefulWidget {
+class DropletAnimation extends StatefulWidget {
   final Widget? child;
   final double? verticalDistance;
   final Duration duration;
   final double? width;
   final double? height;
-  const DropletWrapper(
+  const DropletAnimation(
       {super.key,
         this.child,
         this.verticalDistance = 60,
@@ -15,10 +15,10 @@ class DropletWrapper extends StatefulWidget {
         this.height = 10,});
 
   @override
-  State<DropletWrapper> createState() => _DropletWrapperState();
+  State<DropletAnimation> createState() => _DropletAnimationState();
 }
 
-class _DropletWrapperState extends State<DropletWrapper> with TickerProviderStateMixin {
+class _DropletAnimationState extends State<DropletAnimation> with TickerProviderStateMixin {
   late int randomNumber ;
   late Animation animation1 ;
   late Animation animation2 ;

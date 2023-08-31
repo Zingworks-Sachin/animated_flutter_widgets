@@ -34,7 +34,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             RotationAnimation(page: const SecondPage(), isClockwise: true),
           );
         },
-        child: const Text('Rotation Transition'),
+        child: const Text('Rotation Transition',textAlign: TextAlign.center,),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -46,7 +46,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             SlideLeftPageAnimation(page: const SecondPage()),
           );
         },
-        child: const Text('Slide Left Page Transition'),
+        child: const Text('Slide Left Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -58,7 +58,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             FadePageAnimation(page: const SecondPage()),
           );
         },
-        child: const Text('Fade Page Transition'),
+        child: const Text('Fade Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -70,7 +70,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             RotationPageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Rotation Page Transition'),
+        child: const Text('Rotation Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -82,7 +82,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             OpacityScalePageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Opacity Scale Page Transition'),
+        child: const Text('Opacity Scale Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -94,7 +94,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             ZoomOutPageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Zoom Out Page Transition'),
+        child: const Text('Zoom Out Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -106,7 +106,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             PendulumPageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Pendulum Page Transition'),
+        child: const Text('Pendulum Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -118,7 +118,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             BlinkPageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Blink Page Transition'),
+        child: const Text('Blink Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -130,7 +130,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             ZoomRotatePageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Zoom Rotate Page Transition'),
+        child: const Text('Zoom Rotate Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -142,7 +142,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             RipplePageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Ripple Page Transition'),
+        child: const Text('Ripple Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -154,7 +154,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             SwingPageTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Swing Page Transition'),
+        child: const Text('Swing Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -166,7 +166,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             PopAndScaleTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Pop And Scale Transition'),
+        child: const Text('Pop And Scale Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -178,7 +178,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             ShrinkAndFadeTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Shrink And Fade Transition'),
+        child: const Text('Shrink And Fade Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -190,7 +190,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             ElasticRotationTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Elastic Rotation Transition'),
+        child: const Text('Elastic Rotation Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -202,19 +202,17 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             FlippingRotationTransition(page: const SecondPage(),isReversed: false),
           );
         },
-        child: const Text('Flipping Rotation Transition'),
+        child: const Text('Flipping Rotation Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
+        style: ElevatedButton.styleFrom(backgroundColor: ColorUtility.magenta),
+        onPressed:() {
           Navigator.push(
             context,
             ScaleSlideTransition(page: const SecondPage(),isLeftScaled: true),
           );
         },
-        child: const Text('Scale Slide Transition'),
+        child: const Text('Scale Slide Transition',textAlign: TextAlign.center),
       ),
     ];
     setState(() {
@@ -234,7 +232,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         child: AnimationLimiter(
           child: GridView.builder(
             shrinkWrap: true,
-            // physics: const NeverScrollableScrollPhysics(),
             itemCount:  widgetList.length,
             gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(

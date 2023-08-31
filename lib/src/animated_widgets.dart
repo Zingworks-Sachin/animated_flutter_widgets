@@ -1,14 +1,23 @@
 export 'package:animated_widgets/widgets/heart_widget.dart';
 export 'package:animated_widgets/animations/page_transition_animation.dart';
 export 'package:animated_widgets/animations/droplet_wrapper.dart';
-export 'package:animated_widgets/animations/shimmer_animations.dart';
 export 'package:animated_widgets/animations/image_color_change_animation.dart';
 export 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
 export 'package:animated_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+export 'package:animated_widgets/animations/slide_in_animation.dart';
 export 'package:animated_widgets/animated_widgets/appbars/color_animated_appbar.dart';
-export 'package:animated_widgets/widgets/water_droplet.dart';
+export 'package:animated_widgets/widgets/painters/star_painter.dart';
+export 'package:animated_widgets/widgets/painters/diamond_painter.dart';
+export 'package:animated_widgets/enums/enums.dart';
+export 'package:animated_widgets/animations/3d_rotation_animation_widget.dart';
+export 'package:animated_widgets/animations/button_tap_animation.dart';
+export 'package:animated_widgets/animations/double_tap_animation.dart';
+export 'package:animated_widgets/animations/longpress_button_tap_animation.dart';
+export 'package:animated_widgets/widgets/painters/water_droplet_painter.dart';
+export 'package:animated_widgets/animations/circular_2d_animation.dart';
+export 'package:animated_widgets/animations/cube_3d_animation.dart';
+import 'package:animated_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
-
 
 class AnimatedWidgets extends StatefulWidget {
   const AnimatedWidgets({Key? key, required this.child}) : super(key: key);
@@ -45,20 +54,20 @@ class _AnimatedWidgetsState extends State<AnimatedWidgets> {
   }
 }
 
-class EaseInAnimationWidget extends StatefulWidget {
+class EaseInAnimation extends StatefulWidget {
   final Widget child;
   final Duration duration;
 
-   const EaseInAnimationWidget({super.key,
+   const EaseInAnimation({super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 500),
   });
 
   @override
-  State<EaseInAnimationWidget> createState() => _EaseInAnimationWidgetState();
+  State<EaseInAnimation> createState() => _EaseInAnimationState();
 }
 
-class _EaseInAnimationWidgetState extends State<EaseInAnimationWidget> with SingleTickerProviderStateMixin {
+class _EaseInAnimationState extends State<EaseInAnimation> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -87,162 +96,6 @@ class _EaseInAnimationWidgetState extends State<EaseInAnimationWidget> with Sing
     );
   }
 }
-
-class SlideInAnimationWidget extends StatefulWidget {
-  final Widget child;
-  final Offset beginOffset;
-  final Duration duration;
-
-  const SlideInAnimationWidget({super.key,
-    required this.child,
-    this.beginOffset = const Offset(0.0, 1.0),
-    this.duration = const Duration(milliseconds: 500),
-  });
-
-  @override
-  State<SlideInAnimationWidget> createState() => _SlideInAnimationWidgetState();
-}
-class _SlideInAnimationWidgetState extends State<SlideInAnimationWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animation = Tween<Offset>(
-      begin: widget.beginOffset,
-      end: Offset.zero,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SlideTransition(
-      position: _animation,
-      child: widget.child,
-    );
-  }
-}
-
-
-class SlideOutAnimationWidget extends StatefulWidget {
-  final Widget child;
-  final Offset beginOffset;
-  final Duration duration;
-
-  const SlideOutAnimationWidget({super.key,
-    required this.child,
-    this.beginOffset = const Offset(0.0, 1.0),
-    this.duration = const Duration(milliseconds: 500),
-  });
-
-  @override
-  State<SlideOutAnimationWidget> createState() => _SlideOutAnimationWidgetState();
-}
-class _SlideOutAnimationWidgetState extends State<SlideOutAnimationWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Offset> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    // _controller = AnimationController(
-    //   vsync: this,
-    //   duration: widget.duration,
-    // );
-    // _animation = Tween<Offset>(
-    //   begin: widget.beginOffset,
-    //   end: Offset.zero,
-    // ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-    // _controller.forward();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animation = Tween<Offset>(
-      begin: Offset.zero,
-      end: widget.beginOffset,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-    _controller.forward();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SlideTransition(
-      position: _animation,
-      child: widget.child,
-    );
-  }
-}
-
-// class SlideOutAnimationWidget extends StatefulWidget {
-//   final Widget child;
-//   final Offset endOffset;
-//   final Duration duration;
-//
-//   const SlideOutAnimationWidget({
-//     Key? key,
-//     required this.child,
-//     this.endOffset = const Offset(0.0, 1.0),
-//     this.duration = const Duration(milliseconds: 500),
-//   }) : super(key: key);
-//
-//   @override
-//   State<SlideOutAnimationWidget> createState() =>
-//       _SlideOutAnimationWidgetState();
-// }
-// class _SlideOutAnimationWidgetState extends State<SlideOutAnimationWidget>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   late Animation<Offset> _animation;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = AnimationController(
-//       vsync: this,
-//       duration: widget.duration,
-//     );
-//     _animation = Tween<Offset>(
-//       begin: Offset.zero,
-//       end: widget.endOffset,
-//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-//     _controller.forward();
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return SlideTransition(
-//       position: _animation,
-//       child: widget.child,
-//     );
-//   }
-// }
 
 class RotationAnimationWidget extends StatefulWidget {
   final Widget child;
@@ -293,22 +146,22 @@ class _RotationAnimationWidgetState extends State<RotationAnimationWidget>
   }
 }
 
-class BounceAnimationWidget extends StatefulWidget {
+class BounceAnimation extends StatefulWidget {
   final Widget child;
   final double beginScale;
   final Duration duration;
 
-  const BounceAnimationWidget({super.key,
+  const BounceAnimation({super.key,
     required this.child,
     this.beginScale = 0.5,
     this.duration = const Duration(milliseconds: 500),
   });
 
   @override
-  State<BounceAnimationWidget> createState() => _BounceAnimationWidgetState();
+  State<BounceAnimation> createState() => _BounceAnimationState();
 }
 
-class _BounceAnimationWidgetState extends State<BounceAnimationWidget>
+class _BounceAnimationState extends State<BounceAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -347,20 +200,20 @@ class _BounceAnimationWidgetState extends State<BounceAnimationWidget>
   }
 }
 
-class ShakeAnimationWidget extends StatefulWidget {
+class ShakeAnimation extends StatefulWidget {
   final Widget child;
   final Duration duration;
 
-  const ShakeAnimationWidget({super.key,
+  const ShakeAnimation({super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 500),
   });
 
   @override
-  State<ShakeAnimationWidget> createState() => _ShakeAnimationWidgetState();
+  State<ShakeAnimation> createState() => _ShakeAnimationState();
 }
 
-class _ShakeAnimationWidgetState extends State<ShakeAnimationWidget>
+class _ShakeAnimationState extends State<ShakeAnimation>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _animation;
@@ -447,170 +300,34 @@ class _PulseAnimationState extends State<PulseAnimation>
   }
 }
 
-class FlipAnimation extends StatefulWidget {
-  final Widget frontChild;
-  final Widget backChild;
-  final bool isFlipped;
-  final Duration duration;
-
-  const FlipAnimation({super.key,
-    required this.frontChild,
-    required this.backChild,
-    this.isFlipped = false,
-    this.duration = const Duration(milliseconds: 500),
-  });
-
-  @override
-  State<FlipAnimation> createState() => _FlipAnimationState();
-}
-
-class _FlipAnimationState extends State<FlipAnimation>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _isFlipped = false;
-
-  void _toggleFlip() {
-    setState(() {
-      _isFlipped = !_isFlipped;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
-    _animation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-    if (widget.isFlipped) {
-      _controller.value = 1.0;
-    }
-    _controller.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _controller.reset();
-        if (!_isFlipped) {
-          _toggleFlip();
-        }
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (widget.isFlipped) {
-          _controller.reverse();
-        } else {
-          _controller.forward();
-        }
-      },
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001) // Adjust the perspective
-              ..rotateY((1 - _animation.value) * -3.14159265359), // Half π
-            alignment: Alignment.center,
-            child: _animation.value >= 0.5
-                ? widget.backChild
-                : widget.frontChild,
-          );
-        },
-      ),
-    );
-  }
-}
-
-// class PathAnimation extends StatefulWidget {
-//   final Widget child;
-//   final Path path;
+// class FlipAnimation extends StatefulWidget {
+//   final Widget frontChild;
+//   final Widget backChild;
+//   final bool isFlipped;
 //   final Duration duration;
 //
-//   const PathAnimation({super.key,
-//     required this.child,
-//     required this.path,
-//     this.duration = const Duration(seconds: 3),
+//   const FlipAnimation({super.key,
+//     required this.frontChild,
+//     required this.backChild,
+//     this.isFlipped = false,
+//     this.duration = const Duration(milliseconds: 500),
 //   });
 //
 //   @override
-//   State<PathAnimation> createState() => _PathAnimationState();
+//   State<FlipAnimation> createState() => _FlipAnimationState();
 // }
 //
-// class _PathAnimationState extends State<PathAnimation>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   late Animation<Offset> _animation;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = AnimationController(
-//       vsync: this,
-//       duration: widget.duration,
-//     );
-//     _animation = Tween<Offset>(
-//       begin: Offset.zero,
-//       end: Offset(1.0, 1.0),
-//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
-//     _controller.forward();
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnimatedBuilder(
-//       animation: _animation,
-//       builder: (context, child) {
-//         final dx = widget.path.getBounds().width * _animation.value.dx;
-//         final dy = widget.path.getBounds().height * _animation.value.dy;
-//         return Transform.translate(
-//           offset: Offset(dx, dy),
-//           child: widget.child,
-//         );
-//       },
-//     );
-//   }
-// }
-
-// class PathAnimation extends StatefulWidget {
-//   final Widget child;
-//   final Path path;
-//   final Duration duration;
-//   final bool reversePath;
-//
-//   const PathAnimation({
-//     required this.child,
-//     required this.path,
-//     this.duration = const Duration(seconds: 3),
-//     this.reversePath = false,
-//   });
-//
-//   @override
-//   _PathAnimationState createState() => _PathAnimationState();
-// }
-//
-// class _PathAnimationState extends State<PathAnimation>
+// class _FlipAnimationState extends State<FlipAnimation>
 //     with SingleTickerProviderStateMixin {
 //   late AnimationController _controller;
 //   late Animation<double> _animation;
+//   bool _isFlipped = false;
+//
+//   void _toggleFlip() {
+//     setState(() {
+//       _isFlipped = !_isFlipped;
+//     });
+//   }
 //
 //   @override
 //   void initState() {
@@ -619,36 +336,21 @@ class _FlipAnimationState extends State<FlipAnimation>
 //       vsync: this,
 //       duration: widget.duration,
 //     );
-//
-//     final pathMetric = widget.path.computeMetrics().single;
-//     final pathLength = pathMetric.length;
-//
-//     if (widget.reversePath) {
-//       _animation = Tween<double>(
-//         begin: 0.0,
-//         end: pathLength,
-//       ).animate(_controller);
-//     } else {
-//       _animation = Tween<double>(
-//         begin: pathLength,
-//         end: 0.0,
-//       ).animate(_controller);
+//     _animation = Tween<double>(
+//       begin: 0.0,
+//       end: 1.0,
+//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+//     if (widget.isFlipped) {
+//       _controller.value = 1.0;
 //     }
-//
 //     _controller.addStatusListener((status) {
 //       if (status == AnimationStatus.completed) {
-//         if (widget.reversePath) {
-//           _controller.reverse();
-//         } else {
-//           _controller.reset();
-//           _controller.forward();
+//         _controller.reset();
+//         if (!_isFlipped) {
+//           _toggleFlip();
 //         }
-//       } else if (status == AnimationStatus.dismissed && widget.reversePath) {
-//         _controller.forward();
 //       }
 //     });
-//
-//     _controller.forward();
 //   }
 //
 //   @override
@@ -659,25 +361,31 @@ class _FlipAnimationState extends State<FlipAnimation>
 //
 //   @override
 //   Widget build(BuildContext context) {
-//     return AnimatedBuilder(
-//       animation: _animation,
-//       builder: (context, child) {
-//         final pathMetric = widget.path.computeMetrics().single;
-//         final currentPosition = pathMetric.getTangentForOffset(_animation.value)?.position;
-//         return Transform.translate(
-//           offset: Offset(currentPosition?.dx ?? 10, currentPosition?.dy ?? 10),
-//           child: child,
-//         );
+//     return GestureDetector(
+//       onTap: () {
+//         if (widget.isFlipped) {
+//           _controller.reverse();
+//         } else {
+//           _controller.forward();
+//         }
 //       },
-//       child: widget.child,
+//       child: AnimatedBuilder(
+//         animation: _controller,
+//         builder: (context, child) {
+//           return Transform(
+//             transform: Matrix4.identity()
+//               ..setEntry(3, 2, 0.001) // Adjust the perspective
+//               ..rotateY((1 - _animation.value) * -3.14159265359), // Half π
+//             alignment: Alignment.center,
+//             child: _animation.value >= 0.5
+//                 ? widget.backChild
+//                 : widget.frontChild,
+//           );
+//         },
+//       ),
 //     );
 //   }
 // }
-
-enum PathDirection {
-  forward,
-  reverse,
-}
 
 class PathAnimation extends StatefulWidget {
   final Widget child;
