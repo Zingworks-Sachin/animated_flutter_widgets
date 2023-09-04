@@ -40,6 +40,7 @@ dependencies:
   animated_widgets:
     path: ../
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

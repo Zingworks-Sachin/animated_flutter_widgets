@@ -328,7 +328,6 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
                   backgroundColor: ColorUtility.magenta
               ),
               onPressed:() {
-                print('Button clicked');
               },
               child: const Text('Double Tap Me'),
             ),
@@ -341,12 +340,10 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
                   backgroundColor: ColorUtility.magenta
               ),
               onPressed: () {
-                print('Button clicked!');
               },
-              child: const Text('Click Me'),
+              child: const Text('Tap Me'),
             ),
           ),
-          ColorChangingButton(),
           LongPressTapAnimation(
             // pressDuration: Duration(seconds: 0),
             child: ElevatedButton(
@@ -354,7 +351,6 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
                   backgroundColor: ColorUtility.magenta
               ),
               onPressed: (){
-                print('Button clicked!');
               },
               child: const Text('Long Press Me'),
             ),

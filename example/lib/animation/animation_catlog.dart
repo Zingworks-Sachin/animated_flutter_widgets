@@ -1,6 +1,8 @@
 import 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
+import 'package:animated_widgets/animated_widgets/collection/animated_listview_builder.dart';
 import 'package:animated_widgets/animations/page_transition_animation.dart';
 import 'package:example/animation/animations_example.dart';
+import 'package:example/page_transition/animated_list_view.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +15,22 @@ class AnimationCatlog extends StatefulWidget {
   State<AnimationCatlog> createState() => _AnimationCatlogState();
 }
 
-class _AnimationCatlogState extends State<AnimationCatlog> {
+class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderStateMixin{
   List<Widget> widgetList = [];
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if (mounted){
+    if (mounted) {
       setState(() {
         widgetList = [
           ElevatedButton(
@@ -29,10 +40,13 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
             onPressed: () {
               Navigator.push(
                 context,
-                PopAndScaleTransition(page:  const AnimationExampleWidget(showContineousAnimations: true, animationType: AnimationType.contineous,)),
+                PopAndScaleTransition(page: const AnimationExampleWidget(
+                  showContineousAnimations: true,
+                  animationType: AnimationType.contineous,)),
               );
             },
-            child: const Text('Continuous Animation'),
+            child: const Text(
+              'Continuous Animation', textAlign: TextAlign.center,),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -41,10 +55,12 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
             onPressed: () {
               Navigator.push(
                 context,
-                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: false,animationType: AnimationType.steady)),
+                PopAndScaleTransition(page: const AnimationExampleWidget(
+                    showContineousAnimations: false,
+                    animationType: AnimationType.steady)),
               );
             },
-            child: const Text('Steady Animation'),
+            child: const Text('Steady Animation', textAlign: TextAlign.center,),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -53,15 +69,36 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
             onPressed: () {
               Navigator.push(
                 context,
-                PopAndScaleTransition(page: const AnimationExampleWidget(showContineousAnimations: false,animationType: AnimationType.buttonTap)),
+                PopAndScaleTransition(page: const AnimationExampleWidget(
+                    showContineousAnimations: false,
+                    animationType: AnimationType.buttonTap)),
               );
             },
-            child: const Text('Button Tap Animation'),
+            child: const Text(
+              'Button Tap Animation', textAlign: TextAlign.center,),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: ColorUtility.magenta
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => animatedDialogBox(context),
+              );
+              // Navigator.push(
+              //   context,
+              //   PopAndScaleTransition(page: const AnimatedListView()),
+              // );
+            },
+            child: const Text(
+              'Animated ListView Builder', textAlign: TextAlign.center,),
           ),
         ];
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +114,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
           child: GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount:  widgetList.length,
+            itemCount: widgetList.length,
             gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -91,14 +128,147 @@ class _AnimationCatlogState extends State<AnimationCatlog> {
                   duration: const Duration(milliseconds: 600),
                   columnCount: 2,
                   child: ScaleAnimation(
-                    child: FadeInAnimation(
-                        child: widgetList[index]
-                        )
-                    ),
+                      child: FadeInAnimation(
+                          child: widgetList[index]
+                      )
                   ),
                 ),
           ),
+        ),
       ),
-      );
+    );
   }
+
+  Widget animatedDialogBox(BuildContext context) {
+    // Initialize the animation controller
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    // Create a curved animation
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    );
+
+    // Start the animation
+    _controller.forward();
+
+    return Center(
+      child: AnimatedBuilder(
+        animation: _animation,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _animation.value,
+            child: AlertDialog(
+              title: Center(child: const Text('ListView Animations')),
+              titleTextStyle: TextStyle(color: ColorUtility.magenta,fontSize: 25,fontWeight: FontWeight.bold),
+              alignment: Alignment.center,
+              // content: const Text('This is an animated dialog box.'),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actions: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType: ListItemAnimationType.scaleAndFade)),
+                      );
+                    },
+                    child: const Text(
+                      'Scale and Fade Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.stepAnimation)),
+                      );
+                    },
+                    child: const Text('Step Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.leftScaleAnimation)),
+                      );
+                    },
+                    child: const Text(
+                      'Left Scale Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.rightScaleAnimation)),
+                      );
+                    },
+                    child: const Text(
+                      'Right Scale Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.colorChange)),
+                      );
+                    },
+                    child: const Text(
+                      'Color Change Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.slideAndBounce)),
+                      );
+                    },
+                    child: const Text(
+                      'Slide And Bounce Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+              ]
+            ),
+          );
+        },
+      ),
+    );
+  }
+
 }
