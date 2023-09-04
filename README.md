@@ -2,7 +2,7 @@
 
 <br>
 <p align="center">
-<img alt="animated_flutter_widgets" src="https://github.com/Zingworks-Sachin/twilio_chat_conversation/blob/main/assets/plugin_image.png?raw=true" />
+<img alt="animated_flutter_widgets" src="https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/plugin_image.png?raw=true" />
 </p>
 <br><br>
 
