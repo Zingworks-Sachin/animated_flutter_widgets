@@ -1,39 +1,38 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+[![pub package](https://img.shields.io/pub/v/animated_flutter_widgets.svg)](https://pub.dartlang.org/packages/animated_flutter_widgets)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+<br>
+<p align="center">
+<img alt="animated_flutter_widgets" src="https://github.com/Zingworks-Sachin/animated_flutter_widgets/assets/main/assets/plugin_image.png?raw=true" />
+</p>
+<br><br>
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+# Introduction
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Elevate your Flutter app's user interface to a whole new level with 'animated_flutter_widgets'. This versatile package lets you effortlessly add mesmerizing animations to any widget while also offering a collection of pre-designed animated widgets for accelerated development.
+
+## Supported platforms
+- Android
+- iOS
+- Web
+- MacOS
+- Windows
 
 ## Features
+* Steady Animations
+* Continuous Animations
+* Button Tap Animations
+* Animated ListViews
+* Animated GridViews
+* Animated AppBars
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Example
+Check out the [example](https://github.com/Zingworks-Sachin/animated_flutter_widgets/tree/main/example)
 
-## Getting started
+## License
+[MIT License](https://github.com/Zingworks-Sachin/twilio_chat_conversation/blob/main/LICENSE)
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+## Issues and feedback
+If you have any suggestions for including a feature or if something doesn't work, feel free to open a Github [issue](https://github.com/Zingworks-Sachin/twilio_chat_conversation/issues) or to open a [pull request](https://github.com/Zingworks-Sachin/twilio_chat_conversation/pulls), you are more than welcome to contribute!
 
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+## Contributor
+- Sachin Pandit ([ZingWorks LLP](https://zingworks.in/))
