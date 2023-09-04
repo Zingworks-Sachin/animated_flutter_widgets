@@ -87,10 +87,6 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                 context: context,
                 builder: (context) => const AnimatedDialogBox(title:"Select ListView Animation",listType: ListType.listView ),
               );
-              // Navigator.push(
-              //   context,
-              //   PopAndScaleTransition(page: const AnimatedListView()),
-              // );
             },
             child: const Text(
               'Animated ListView', textAlign: TextAlign.center,),
@@ -110,6 +106,10 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
           ),
         ];
       });
+      _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 500),
+      );
     }
   }
 
@@ -222,11 +222,11 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScaleAnimation)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleOut)),
                       );
                     },
                     child: const Text(
-                      'Left Scale Animation', textAlign: TextAlign.center,),
+                      'Scale Out Animation', textAlign: TextAlign.center,),
                   ),
                 ),
                 Align(
@@ -238,11 +238,11 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleLoad)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScaleAnimation)),
                       );
                     },
                     child: const Text(
-                      'Lazy Scale Animation', textAlign: TextAlign.center,),
+                      'Left Scale Animation', textAlign: TextAlign.center,),
                   ),
                 ),
                 Align(

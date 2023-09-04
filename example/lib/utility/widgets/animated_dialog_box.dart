@@ -11,7 +11,9 @@ class AnimatedDialogBox extends StatefulWidget {
   final String title;
   final ListType listType;
   final TextStyle? titleTextStyle;
-  const AnimatedDialogBox({Key? key, required this.title, this.titleTextStyle, required this.listType}) : super(key: key);
+  final List<Widget>? actions;
+
+  const AnimatedDialogBox({Key? key, required this.title, this.titleTextStyle, required this.listType, this.actions}) : super(key: key);
 
   @override
   State<AnimatedDialogBox> createState() => _AnimatedDialogBoxState();
@@ -50,7 +52,7 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                 alignment: Alignment.center,
                 // content: const Text('This is an animated dialog box.'),
                 actionsAlignment: MainAxisAlignment.spaceBetween,
-                actions: <Widget>[
+                actions: widget.actions ?? <Widget>[
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
@@ -91,11 +93,11 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                       onPressed: () {
                         Navigator.push(
                           context,
-                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScaleAnimation)),
+                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleOut)),
                         );
                       },
                       child: const Text(
-                        'Left Scale Animation', textAlign: TextAlign.center,),
+                        'Scale Out Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(
@@ -107,11 +109,11 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                       onPressed: () {
                         Navigator.push(
                           context,
-                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleLoad)),
+                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScaleAnimation)),
                         );
                       },
                       child: const Text(
-                        'Lazy Scale Animation', textAlign: TextAlign.center,),
+                        'Left Scale Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(
@@ -283,17 +285,17 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleLoad)),
+                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleOut)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.scaleLoad)),
+                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.scaleOut)),
                           );
                         }
                       },
                       child: const Text(
-                        'Lazy Scale Animation', textAlign: TextAlign.center,),
+                        'Scale Out Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(

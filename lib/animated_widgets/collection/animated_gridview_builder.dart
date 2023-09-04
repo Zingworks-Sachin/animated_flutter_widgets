@@ -280,7 +280,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       case CollectionAnimationType.rightScaleAnimation:
         return _buildGridView(itemBuilder: (context, index) =>
             _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),);
-      case CollectionAnimationType.scaleLoad:
+      case CollectionAnimationType.scaleOut:
         return _buildGridView(itemBuilder: (context, index) =>
             _buildScaleLoadAnimation(context, index,widget.animationDuration));
       default:

@@ -15,5 +15,5 @@ enum CollectionAnimationType {
   slideAndBounce,
   leftScaleAnimation,
   rightScaleAnimation,
-  scaleLoad
+  scaleOut
 }

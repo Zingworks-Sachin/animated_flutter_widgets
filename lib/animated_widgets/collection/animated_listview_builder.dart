@@ -281,7 +281,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       case CollectionAnimationType.rightScaleAnimation:
         return _buildListView(itemBuilder: (context, index) =>
             _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation));
-      case CollectionAnimationType.scaleLoad:
+      case CollectionAnimationType.scaleOut:
         return _buildListView(itemBuilder: (context, index) =>
             _buildScaleLoadAnimation(context, index,widget.animationDuration));
       default:
