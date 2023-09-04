@@ -2,7 +2,7 @@
 
 <br>
 <p align="center">
-<img alt="animated_flutter_widgets" src="https://github.com/Zingworks-Sachin/animated_flutter_widgets/assets/main/assets/plugin_image.png?raw=true" />
+<img alt="animated_flutter_widgets" src="https://github.com/Zingworks-Sachin/twilio_chat_conversation/blob/main/assets/plugin_image.png?raw=true" />
 </p>
 <br><br>
 
@@ -20,6 +20,7 @@ Elevate your Flutter app's user interface to a whole new level with 'animated_fl
 ## Features
 * Steady Animations
 * Continuous Animations
+* Page Transition Animations
 * Button Tap Animations
 * Animated ListViews
 * Animated GridViews
