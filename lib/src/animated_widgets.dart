@@ -9,15 +9,15 @@ export 'package:animated_flutter_widgets/animated_widgets/appbars/color_animated
 export 'package:animated_flutter_widgets/widgets/painters/star_painter.dart';
 export 'package:animated_flutter_widgets/widgets/painters/diamond_painter.dart';
 export 'package:animated_flutter_widgets/enums/enums.dart';
-export 'package:animated_flutter_widgets/animations/3d_rotation_animation_widget.dart';
+export 'package:animated_flutter_widgets/animations/rotation_3d_animation.dart';
 export 'package:animated_flutter_widgets/animations/button_tap_animation.dart';
 export 'package:animated_flutter_widgets/animations/double_tap_animation.dart';
 export 'package:animated_flutter_widgets/animations/longpress_button_tap_animation.dart';
 export 'package:animated_flutter_widgets/widgets/painters/water_droplet_painter.dart';
 export 'package:animated_flutter_widgets/animations/circular_2d_animation.dart';
 export 'package:animated_flutter_widgets/animations/cube_3d_animation.dart';
-export 'package:animated_flutter_widgets/animated_widgets/collection/animated_listview_builder.dart';
-export 'package:animated_flutter_widgets/animated_widgets/collection/animated_gridview_builder.dart';
+export 'package:animated_flutter_widgets/animated_widgets/scroll_widget/animated_listview_builder.dart';
+export 'package:animated_flutter_widgets/animated_widgets/scroll_widget/animated_gridview_builder.dart';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 

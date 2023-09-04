@@ -1,5 +1,5 @@
 import 'package:animated_flutter_widgets/animated_widgets/appbars/fade_in_appbar.dart';
-import 'package:animated_flutter_widgets/animated_widgets/collection/animated_gridview_builder.dart';
+import 'package:animated_flutter_widgets/animated_widgets/scroll_widget/animated_gridview_builder.dart';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';

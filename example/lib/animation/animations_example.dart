@@ -1,5 +1,5 @@
 import 'package:animated_flutter_widgets/animated_widgets.dart';
-import 'package:animated_flutter_widgets/animations/3d_rotation_animation_widget.dart';
+import 'package:animated_flutter_widgets/animations/rotation_3d_animation.dart';
 import 'package:animated_flutter_widgets/animations/bounce_animations.dart';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:animated_flutter_widgets/widgets/heart_widget.dart';
