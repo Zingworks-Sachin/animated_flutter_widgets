@@ -33,12 +33,14 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
   late AnimationController _leftRightScaleAnimationController;
   late AnimationController _scaleAndFadeAnimationController;
   late AnimationController _slideAndBounceAnimationController;
+  late AnimationController? _scaleLoadAnimationController;
 
   double screenWidth = 0.0;
 
   double screenHeight = 0.0;
 
   var startAnimation = false;
+
 
   @override
   void initState() {
@@ -65,6 +67,10 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       duration: widget.animationDuration,
       vsync: this,
     );
+    _scaleLoadAnimationController = AnimationController(
+      duration: widget.animationDuration,
+      vsync: this,
+    );
     _startAnimations();
   }
 
@@ -75,6 +81,8 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
     _leftRightScaleAnimationController.dispose();
     _scaleAndFadeAnimationController.dispose();
     _slideAndBounceAnimationController.dispose();
+    _scaleLoadAnimationController?.dispose();
+    _scaleLoadAnimationController = null;
     super.dispose();
   }
 
@@ -223,6 +231,24 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       child: widget.itemBuilder(context, index),
     );
   }
+  Widget _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
+    if (_scaleLoadAnimationController != null){
+      Future.delayed(Duration(milliseconds: index * 1000), () {
+        _scaleLoadAnimationController?.forward();
+      });
+    }
+    return ScaleTransition(
+      scale: _scaleLoadAnimationController!.drive(
+        CurveTween(curve: Curves.easeInOut),
+      ),
+      child: FadeTransition(
+        opacity: _scaleLoadAnimationController!.drive(
+          CurveTween(curve: Curves.easeInOut),
+        ),
+        child: widget.itemBuilder(context, index), // Replace with your grid item widget
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -264,6 +290,12 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
               _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),
+        );
+      case CollectionAnimationType.scaleLoad:
+        return ListView.builder(
+          itemCount: widget.itemCount,
+          itemBuilder: (context, index) =>
+              _buildScaleLoadAnimation(context, index,widget.animationDuration),
         );
       default:
         return ListView.builder(

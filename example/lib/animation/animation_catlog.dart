@@ -5,6 +5,7 @@ import 'package:example/animation/animations_example.dart';
 import 'package:example/animation/animated_list_view.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
+import 'package:example/utility/widgets/animated_dialog_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -41,12 +42,11 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
               Navigator.push(
                 context,
                 PopAndScaleTransition(page: const AnimationExampleWidget(
-                  showContineousAnimations: true,
-                  animationType: AnimationType.contineous,)),
+                    showContineousAnimations: false,
+                    animationType: AnimationType.steady)),
               );
             },
-            child: const Text(
-              'Continuous Animation', textAlign: TextAlign.center,),
+            child: const Text('Steady Animation', textAlign: TextAlign.center,),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -56,11 +56,12 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
               Navigator.push(
                 context,
                 PopAndScaleTransition(page: const AnimationExampleWidget(
-                    showContineousAnimations: false,
-                    animationType: AnimationType.steady)),
+                  showContineousAnimations: true,
+                  animationType: AnimationType.contineous,)),
               );
             },
-            child: const Text('Steady Animation', textAlign: TextAlign.center,),
+            child: const Text(
+              'Continuous Animation', textAlign: TextAlign.center,),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -84,7 +85,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => animatedDialogBox(context),
+                builder: (context) => const AnimatedDialogBox(title:"Select ListView Animation",listType: ListType.listView ),
               );
               // Navigator.push(
               //   context,
@@ -92,7 +93,20 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
               // );
             },
             child: const Text(
-              'Animated ListView Builder', textAlign: TextAlign.center,),
+              'Animated ListView', textAlign: TextAlign.center,),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: ColorUtility.magenta
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const AnimatedDialogBox(title:"Select GridView Animation", listType: ListType.gridView ,),
+              );
+            },
+            child: const Text(
+              'Animated GridView', textAlign: TextAlign.center,),
           ),
         ];
       });
@@ -162,7 +176,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
           return Transform.scale(
             scale: _animation.value,
             child: AlertDialog(
-              title: Center(child: const Text('ListView Animations')),
+              title: const Center(child: Text('ListView Animations')),
               titleTextStyle: TextStyle(color: ColorUtility.magenta,fontSize: 25,fontWeight: FontWeight.bold),
               alignment: Alignment.center,
               // content: const Text('This is an animated dialog box.'),

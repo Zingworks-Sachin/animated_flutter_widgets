@@ -12,7 +12,7 @@ class AnimatedGridView extends StatelessWidget {
     return Scaffold(
       appBar: FadeInAnimatedAppBar(
         backgroundColor: ColorUtility.magenta,
-        title: const Text('Animated ListView Builder'),
+        title: const Text('Animated GridView'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

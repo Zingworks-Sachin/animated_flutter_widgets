@@ -234,6 +234,24 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       child: widget.itemBuilder(context, index),
     );
   }
+  Widget _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
+    if (_scaleLoadAnimationController != null){
+      Future.delayed(Duration(milliseconds: index * 1000), () {
+        _scaleLoadAnimationController?.forward();
+      });
+    }
+    return ScaleTransition(
+      scale: _scaleLoadAnimationController!.drive(
+        CurveTween(curve: Curves.easeInOut),
+      ),
+      child: FadeTransition(
+        opacity: _scaleLoadAnimationController!.drive(
+          CurveTween(curve: Curves.easeInOut),
+        ),
+        child: widget.itemBuilder(context, index), // Replace with your grid item widget
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -313,24 +331,5 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
               _buildFadeAnimation(context, index),
         );
     }
-  }
-
-  _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
-    if (_scaleLoadAnimationController != null){
-      Future.delayed(Duration(milliseconds: index * 1000), () {
-        _scaleLoadAnimationController?.forward();
-      });
-    }
-    return ScaleTransition(
-      scale: _scaleLoadAnimationController!.drive(
-        CurveTween(curve: Curves.easeInOut),
-      ),
-      child: FadeTransition(
-        opacity: _scaleLoadAnimationController!.drive(
-          CurveTween(curve: Curves.easeInOut),
-        ),
-        child: widget.itemBuilder(context, index), // Replace with your grid item widget
-      ),
-    );
   }
 }

@@ -12,7 +12,7 @@ class AnimatedListView extends StatelessWidget {
     return Scaffold(
       appBar: FadeInAnimatedAppBar(
         backgroundColor: ColorUtility.magenta,
-        title: const Text('Animated ListView Builder'),
+        title: const Text('Animated ListView'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

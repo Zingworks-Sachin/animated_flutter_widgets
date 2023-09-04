@@ -3,3 +3,8 @@ enum AnimationType {
   steady,
   buttonTap
 }
+
+enum ListType {
+  listView,
+  gridView
+}
