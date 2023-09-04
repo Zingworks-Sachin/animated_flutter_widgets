@@ -1,24 +1,24 @@
-export 'package:animated_widgets/widgets/heart_widget.dart';
-export 'package:animated_widgets/animations/page_transition_animation.dart';
-export 'package:animated_widgets/animations/droplet_wrapper.dart';
-export 'package:animated_widgets/animations/image_color_change_animation.dart';
-export 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
-export 'package:animated_widgets/animated_widgets/appbars/slide_in_appbar.dart';
-export 'package:animated_widgets/animations/slide_in_animation.dart';
-export 'package:animated_widgets/animated_widgets/appbars/color_animated_appbar.dart';
-export 'package:animated_widgets/widgets/painters/star_painter.dart';
-export 'package:animated_widgets/widgets/painters/diamond_painter.dart';
-export 'package:animated_widgets/enums/enums.dart';
-export 'package:animated_widgets/animations/3d_rotation_animation_widget.dart';
-export 'package:animated_widgets/animations/button_tap_animation.dart';
-export 'package:animated_widgets/animations/double_tap_animation.dart';
-export 'package:animated_widgets/animations/longpress_button_tap_animation.dart';
-export 'package:animated_widgets/widgets/painters/water_droplet_painter.dart';
-export 'package:animated_widgets/animations/circular_2d_animation.dart';
-export 'package:animated_widgets/animations/cube_3d_animation.dart';
-export 'package:animated_widgets/animated_widgets/collection/animated_listview_builder.dart';
-export 'package:animated_widgets/animated_widgets/collection/animated_gridview_builder.dart';
-import 'package:animated_widgets/enums/enums.dart';
+export 'package:animated_flutter_widgets/widgets/heart_widget.dart';
+export 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
+export 'package:animated_flutter_widgets/animations/droplet_wrapper.dart';
+export 'package:animated_flutter_widgets/animations/image_color_change_animation.dart';
+export 'package:animated_flutter_widgets/animated_widgets/appbars/fade_in_appbar.dart';
+export 'package:animated_flutter_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+export 'package:animated_flutter_widgets/animations/slide_in_animation.dart';
+export 'package:animated_flutter_widgets/animated_widgets/appbars/color_animated_appbar.dart';
+export 'package:animated_flutter_widgets/widgets/painters/star_painter.dart';
+export 'package:animated_flutter_widgets/widgets/painters/diamond_painter.dart';
+export 'package:animated_flutter_widgets/enums/enums.dart';
+export 'package:animated_flutter_widgets/animations/3d_rotation_animation_widget.dart';
+export 'package:animated_flutter_widgets/animations/button_tap_animation.dart';
+export 'package:animated_flutter_widgets/animations/double_tap_animation.dart';
+export 'package:animated_flutter_widgets/animations/longpress_button_tap_animation.dart';
+export 'package:animated_flutter_widgets/widgets/painters/water_droplet_painter.dart';
+export 'package:animated_flutter_widgets/animations/circular_2d_animation.dart';
+export 'package:animated_flutter_widgets/animations/cube_3d_animation.dart';
+export 'package:animated_flutter_widgets/animated_widgets/collection/animated_listview_builder.dart';
+export 'package:animated_flutter_widgets/animated_widgets/collection/animated_gridview_builder.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedWidgets extends StatefulWidget {
@@ -301,93 +301,6 @@ class _PulseAnimationState extends State<PulseAnimation>
     );
   }
 }
-
-// class FlipAnimation extends StatefulWidget {
-//   final Widget frontChild;
-//   final Widget backChild;
-//   final bool isFlipped;
-//   final Duration duration;
-//
-//   const FlipAnimation({super.key,
-//     required this.frontChild,
-//     required this.backChild,
-//     this.isFlipped = false,
-//     this.duration = const Duration(milliseconds: 500),
-//   });
-//
-//   @override
-//   State<FlipAnimation> createState() => _FlipAnimationState();
-// }
-//
-// class _FlipAnimationState extends State<FlipAnimation>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   late Animation<double> _animation;
-//   bool _isFlipped = false;
-//
-//   void _toggleFlip() {
-//     setState(() {
-//       _isFlipped = !_isFlipped;
-//     });
-//   }
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = AnimationController(
-//       vsync: this,
-//       duration: widget.duration,
-//     );
-//     _animation = Tween<double>(
-//       begin: 0.0,
-//       end: 1.0,
-//     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
-//     if (widget.isFlipped) {
-//       _controller.value = 1.0;
-//     }
-//     _controller.addStatusListener((status) {
-//       if (status == AnimationStatus.completed) {
-//         _controller.reset();
-//         if (!_isFlipped) {
-//           _toggleFlip();
-//         }
-//       }
-//     });
-//   }
-//
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         if (widget.isFlipped) {
-//           _controller.reverse();
-//         } else {
-//           _controller.forward();
-//         }
-//       },
-//       child: AnimatedBuilder(
-//         animation: _controller,
-//         builder: (context, child) {
-//           return Transform(
-//             transform: Matrix4.identity()
-//               ..setEntry(3, 2, 0.001) // Adjust the perspective
-//               ..rotateY((1 - _animation.value) * -3.14159265359), // Half π
-//             alignment: Alignment.center,
-//             child: _animation.value >= 0.5
-//                 ? widget.backChild
-//                 : widget.frontChild,
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class PathAnimation extends StatefulWidget {
   final Widget child;

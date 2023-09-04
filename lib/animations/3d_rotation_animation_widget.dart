@@ -1,4 +1,4 @@
-import 'package:animated_widgets/enums/enums.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 

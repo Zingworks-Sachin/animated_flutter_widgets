@@ -1,6 +1,7 @@
-import 'package:animated_widgets/animated_widgets.dart';
+import 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
+import 'package:animated_flutter_widgets/animations/slide_in_animation.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/animation/animation_catlog.dart';
-import 'package:example/animation/animations_example.dart';
 import 'package:example/page_transition/page_transition_animations.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';

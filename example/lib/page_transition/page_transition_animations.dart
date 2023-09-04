@@ -1,5 +1,5 @@
-import 'package:animated_widgets/animated_widgets/appbars/slide_in_appbar.dart';
-import 'package:animated_widgets/animations/page_transition_animation.dart';
+import 'package:animated_flutter_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+import 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
 import 'package:example/page_transition/second_page.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,3 @@
-import 'package:animated_widgets/animated_widgets.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 

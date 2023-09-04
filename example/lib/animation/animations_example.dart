@@ -1,5 +1,8 @@
-import 'package:animated_widgets/animated_widgets.dart';
-import 'package:animated_widgets/animations/bounce_animations.dart';
+import 'package:animated_flutter_widgets/animated_widgets.dart';
+import 'package:animated_flutter_widgets/animations/3d_rotation_animation_widget.dart';
+import 'package:animated_flutter_widgets/animations/bounce_animations.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
+import 'package:animated_flutter_widgets/widgets/heart_widget.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
 import 'package:flutter/material.dart';
@@ -320,17 +323,18 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
       case AnimationType.buttonTap:
       // TODO: Handle this case.
         widgetList = [
-          DoubleTapAnimation(
-            duration: const Duration(milliseconds: 200),
-            scaleValue: 0.95,
+          LongPressTapAnimation(
+            // pressDuration: Duration(seconds: 0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: ColorUtility.magenta
               ),
-              onPressed:() {
+              onPressed: (){
               },
-              child: const Text('Double Tap Me'),
+              child: const Text('Long Press Me'),
             ),
+            // duration: Duration(milliseconds: 200),
+            // scaleValue: 0.95,
           ),
           ButtonTapAnimation(
             duration: const Duration(milliseconds: 300),
@@ -344,18 +348,17 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
               child: const Text('Tap Me'),
             ),
           ),
-          LongPressTapAnimation(
-            // pressDuration: Duration(seconds: 0),
+          DoubleTapAnimation(
+            duration: const Duration(milliseconds: 200),
+            scaleValue: 0.95,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: ColorUtility.magenta
               ),
-              onPressed: (){
+              onPressed:() {
               },
-              child: const Text('Long Press Me'),
+              child: const Text('Double Tap Me'),
             ),
-            // duration: Duration(milliseconds: 200),
-            // scaleValue: 0.95,
           )
         ];
         break;

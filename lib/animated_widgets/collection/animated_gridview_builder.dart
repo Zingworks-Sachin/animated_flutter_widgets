@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-import 'package:animated_widgets/enums/enums.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedGridViewBuilder extends StatefulWidget {
@@ -222,7 +222,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
           width: screenWidth,
           curve: Curves.easeInOut,
           duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
-          transform: (listItemAnimationType == CollectionAnimationType.rightScaleAnimation)?
+          transform: (listItemAnimationType == CollectionAnimationType.rightScale)?
           Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0)
               :Matrix4.translationValues(translationX.toDouble(), 0, 0), // Updated translation
           margin: const EdgeInsets.only(
@@ -268,18 +268,18 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     switch (widget.animationType) {
       case CollectionAnimationType.listColored:
         return _buildGridView(itemBuilder: (context, index) => _buildColorChangeAnimation(context, index,));
-      case CollectionAnimationType.stepAnimation:
+      case CollectionAnimationType.waterFall:
         return _buildGridView(itemBuilder: (context, index) => _buildStepAnimation(context, index,));
-      case CollectionAnimationType.slideAndBounce:
+      case CollectionAnimationType.bounce:
         return _buildGridView(itemBuilder: (context, index) => _buildSlideAndBounceAnimation(context, index));
       case CollectionAnimationType.fadeOut:
         return _buildGridView(itemBuilder: (context, index) => _buildFadeAnimation(context, index));
-      case CollectionAnimationType.leftScaleAnimation:
+      case CollectionAnimationType.leftScale:
         return _buildGridView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation));
-      case CollectionAnimationType.rightScaleAnimation:
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScale));
+      case CollectionAnimationType.rightScale:
         return _buildGridView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),);
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScale),);
       case CollectionAnimationType.scaleOut:
         return _buildGridView(itemBuilder: (context, index) =>
             _buildScaleLoadAnimation(context, index,widget.animationDuration));

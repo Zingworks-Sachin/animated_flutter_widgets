@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:animated_widgets/enums/enums.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedListViewBuilder extends StatefulWidget {
@@ -219,7 +219,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
           width: screenWidth,
           curve: Curves.easeInOut,
           duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
-          transform: (listItemAnimationType == CollectionAnimationType.rightScaleAnimation)?
+          transform: (listItemAnimationType == CollectionAnimationType.rightScale)?
           Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0)
               :Matrix4.translationValues(translationX.toDouble(), 0, 0), // Updated translation
           margin: const EdgeInsets.only(
@@ -266,21 +266,21 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       case CollectionAnimationType.listColored:
         return _buildListView(itemBuilder: (context, index) =>
             _buildColorChangeAnimation(context, index));
-      case CollectionAnimationType.stepAnimation:
+      case CollectionAnimationType.waterFall:
         return _buildListView(itemBuilder: (context, index) =>
             _buildStepAnimation(context, index));
-      case CollectionAnimationType.slideAndBounce:
+      case CollectionAnimationType.bounce:
         return _buildListView(itemBuilder: (context, index) =>
             _buildSlideAndBounceAnimation(context, index));
       case CollectionAnimationType.fadeOut:
         return _buildListView(itemBuilder: (context, index) =>
             _buildScaleAndFadeAnimation(context, index));
-      case CollectionAnimationType.leftScaleAnimation:
+      case CollectionAnimationType.leftScale:
         return _buildListView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation));
-      case CollectionAnimationType.rightScaleAnimation:
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScale));
+      case CollectionAnimationType.rightScale:
         return _buildListView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation));
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScale));
       case CollectionAnimationType.scaleOut:
         return _buildListView(itemBuilder: (context, index) =>
             _buildScaleLoadAnimation(context, index,widget.animationDuration));

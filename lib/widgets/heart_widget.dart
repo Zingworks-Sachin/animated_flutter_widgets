@@ -1,4 +1,4 @@
-import 'package:animated_widgets/utility/painter/heart_painter.dart';
+import 'package:animated_flutter_widgets/utility/painter/heart_painter.dart';
 import 'package:flutter/material.dart';
 
 class HeartShape extends StatelessWidget {

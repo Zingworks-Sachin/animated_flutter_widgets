@@ -10,10 +10,10 @@ enum PathDirection {
 }
 enum CollectionAnimationType {
   listColored,
-  stepAnimation,
+  waterFall,
   fadeOut,
-  slideAndBounce,
-  leftScaleAnimation,
-  rightScaleAnimation,
+  bounce,
+  leftScale,
+  rightScale,
   scaleOut
 }
