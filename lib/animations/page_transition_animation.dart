@@ -532,11 +532,11 @@ class ScaleSlideTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class RotationAnimation<T> extends PageRouteBuilder<T> {
+class RotateAnimation<T> extends PageRouteBuilder<T> {
   final Widget page;
   final bool isClockwise;
 
-  RotationAnimation({required this.page, required this.isClockwise})
+  RotateAnimation({required this.page, required this.isClockwise})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

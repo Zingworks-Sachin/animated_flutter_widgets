@@ -1,8 +1,5 @@
 import 'package:animated_flutter_widgets/animated_widgets.dart';
-import 'package:animated_flutter_widgets/animations/rotation_3d_animation.dart';
 import 'package:animated_flutter_widgets/animations/bounce_animations.dart';
-import 'package:animated_flutter_widgets/enums/enums.dart';
-import 'package:animated_flutter_widgets/widgets/heart_widget.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
 import 'package:flutter/material.dart';
@@ -298,8 +295,7 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
               ),
             ),
           ),
-
-          RotationAnimationWidget(
+          RotationAnimation(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: ColorUtility.magenta

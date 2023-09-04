@@ -31,7 +31,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         onPressed: () {
           Navigator.push(
             context,
-            RotationAnimation(page: const SecondPage(), isClockwise: true),
+            RotateAnimation(page: const SecondPage(), isClockwise: true),
           );
         },
         child: const Text('Rotation Transition',textAlign: TextAlign.center,),
