@@ -139,11 +139,11 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                       onPressed: () {
                         Navigator.push(
                           context,
-                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.colorChange)),
+                          PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.listColored)),
                         );
                       },
                       child: const Text(
-                        'Color Change Animation', textAlign: TextAlign.center,),
+                        'List Colored Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(
@@ -198,12 +198,35 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
           return Transform.scale(
             scale: _animation.value,
             child: AlertDialog(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
                 title: Center(child: Text(widget.title)),
                 titleTextStyle: TextStyle(color: ColorUtility.magenta,fontSize: 22,fontWeight: FontWeight.bold),
                 alignment: Alignment.center,
-                // content: const Text('This is an animated dialog box.'),
                 actionsAlignment: MainAxisAlignment.spaceBetween,
                 actions: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorUtility.magenta
+                      ),
+                      onPressed: () {
+                        if(widget.listType == ListType.listView){
+                          Navigator.push(
+                            context,
+                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.stepAnimation)),
+                          );
+                        }else {
+                          Navigator.push(
+                            context,
+                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.stepAnimation)),
+                          );
+                        }
+                      },
+                      child: const Text('Step Animation', textAlign: TextAlign.center,),
+                    ),
+                  ),
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(
@@ -225,28 +248,6 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                       },
                       child: const Text(
                         'Fade Out Animation', textAlign: TextAlign.center,),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorUtility.magenta
-                      ),
-                      onPressed: () {
-                        if(widget.listType == ListType.listView){
-                          Navigator.push(
-                            context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.stepAnimation)),
-                          );
-                        }else {
-                          Navigator.push(
-                            context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.stepAnimation)),
-                          );
-                        }
-                      },
-                      child: const Text('Step Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(
@@ -328,17 +329,17 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.colorChange)),
+                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.listColored)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.colorChange)),
+                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.listColored)),
                           );
                         }
                       },
                       child: const Text(
-                        'Color Change Animation', textAlign: TextAlign.center,),
+                        'List Colored Animation', textAlign: TextAlign.center,),
                     ),
                   ),
                   Align(

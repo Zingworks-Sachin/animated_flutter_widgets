@@ -11,7 +11,17 @@ class AnimatedGridViewBuilder extends StatefulWidget {
   final double itemDelay;
   final Color? colorChangeHighlightColor;
   final double? bounceAmplitude;
-  final int? delay; // Custom color for colorChange
+  final SliverGridDelegate? gridDelegate;
+  final SliverChildDelegate? childrenDelegate;
+  final int? delay;
+  final Axis? scrollDirection;
+  final ScrollController? controller;
+  final bool? reverse;
+  final bool? primary;
+  final bool? shrinkWrap;
+  final ScrollPhysics? physics;
+  final EdgeInsetsGeometry? padding;
+
 
   const AnimatedGridViewBuilder({super.key,
     required this.itemCount,
@@ -21,7 +31,7 @@ class AnimatedGridViewBuilder extends StatefulWidget {
     this.itemDelay = 0.1,
     this.bounceAmplitude,
     this.colorChangeHighlightColor, // Add custom color parameter for colorChange
-    this.delay
+    this.delay, this.gridDelegate, this.childrenDelegate, this.scrollDirection, this.controller, this.reverse, this.primary, this.shrinkWrap, this.physics, this.padding
   });
 
   @override
@@ -79,7 +89,6 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
 
   @override
   void dispose() {
-    // Dispose of animation controllers to prevent memory leaks
     _stepAnimationController.dispose();
     _leftRightScaleAnimationController.dispose();
     _scaleAndFadeAnimationController.dispose();
@@ -88,7 +97,6 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     _scaleLoadAnimationController = null;
     super.dispose();
   }
-
   void _startAnimations() {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted) {
@@ -107,7 +115,6 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       }
     });
   }
-
   Widget _buildColorChangeAnimation(BuildContext context, int index) {
     final color = widget.colorChangeHighlightColor ?? Colors.transparent;
     return AnimatedContainer(
@@ -211,7 +218,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       animation: _leftRightScaleAnimationController,
       builder: (context, child) {
         return AnimatedContainer(
-          height: 55,
+          // height: 55,
           width: screenWidth,
           curve: Curves.easeInOut,
           duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
@@ -259,77 +266,41 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     screenWidth = MediaQuery.of(context).size.width;
 
     switch (widget.animationType) {
-      case CollectionAnimationType.colorChange:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildColorChangeAnimation(context, index),
-        );
+      case CollectionAnimationType.listColored:
+        return _buildGridView(itemBuilder: (context, index) => _buildColorChangeAnimation(context, index,));
       case CollectionAnimationType.stepAnimation:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) => _buildStepAnimation(context, index,),
-        );
+        return _buildGridView(itemBuilder: (context, index) => _buildStepAnimation(context, index,));
       case CollectionAnimationType.slideAndBounce:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildSlideAndBounceAnimation(context, index),
-        );
+        return _buildGridView(itemBuilder: (context, index) => _buildSlideAndBounceAnimation(context, index));
       case CollectionAnimationType.fadeOut:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildFadeAnimation(context, index),
-        );
+        return _buildGridView(itemBuilder: (context, index) => _buildFadeAnimation(context, index));
       case CollectionAnimationType.leftScaleAnimation:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation),
-        );
+        return _buildGridView(itemBuilder: (context, index) =>
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation));
       case CollectionAnimationType.rightScaleAnimation:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),
-        );
+        return _buildGridView(itemBuilder: (context, index) =>
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),);
       case CollectionAnimationType.scaleLoad:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildScaleLoadAnimation(context, index,widget.animationDuration),
-        );
+        return _buildGridView(itemBuilder: (context, index) =>
+            _buildScaleLoadAnimation(context, index,widget.animationDuration));
       default:
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildFadeAnimation(context, index),
-        );
+        return _buildGridView(itemBuilder: (context, index) =>
+            _buildFadeAnimation(context, index));
     }
+  }
+  Widget _buildGridView({required Widget? Function(BuildContext context, int index) itemBuilder}){
+    return GridView.builder(
+      gridDelegate: widget.gridDelegate ?? const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: widget.itemCount,
+      padding: widget.padding,
+      physics: widget.physics,
+      shrinkWrap: widget.shrinkWrap ?? false,
+      primary: widget.primary,
+      scrollDirection: widget.scrollDirection ?? Axis.vertical,
+      itemBuilder: itemBuilder
+          // (itemBuilder ?? _buildFadeAnimation(context, index)),
+    );
   }
 }

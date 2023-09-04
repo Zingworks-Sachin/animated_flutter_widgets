@@ -22,11 +22,11 @@ class AnimatedListView extends StatelessWidget {
           animationType: collectionAnimationType,
           itemBuilder: (context, index) {
             return Card(
-              color: (collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.white: ColorUtility.magenta,
+              color: (collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.white: ColorUtility.magenta,
               child: Center(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
+                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
                 ),
               ),
             );

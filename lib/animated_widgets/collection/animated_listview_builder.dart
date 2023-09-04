@@ -9,7 +9,14 @@ class AnimatedListViewBuilder extends StatefulWidget {
   final Duration? animationDuration;
   final double itemDelay;
   final Color? customColor;
-  final double? bounceAmplitude; // Custom color for colorChange
+  final double? bounceAmplitude;
+  final Axis? scrollDirection;
+  final ScrollController? controller;
+  final bool? reverse;
+  final bool? primary;
+  final bool? shrinkWrap;
+  final ScrollPhysics? physics;
+  final EdgeInsetsGeometry? padding;
 
   const AnimatedListViewBuilder({super.key,
     required this.itemCount,
@@ -18,7 +25,7 @@ class AnimatedListViewBuilder extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 500),
     this.itemDelay = 0.1,
     this.bounceAmplitude,
-    this.customColor, // Add custom color parameter for colorChange
+    this.customColor, this.scrollDirection, this.controller, this.reverse, this.primary, this.shrinkWrap, this.physics, this.padding, // Add custom color parameter for colorChange
   });
 
   @override
@@ -208,7 +215,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       animation: _leftRightScaleAnimationController,
       builder: (context, child) {
         return AnimatedContainer(
-          height: 55,
+          // height: 55,
           width: screenWidth,
           curve: Curves.easeInOut,
           duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
@@ -256,53 +263,41 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
     screenWidth = MediaQuery.of(context).size.width;
 
     switch (widget.animationType) {
-      case CollectionAnimationType.colorChange:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildColorChangeAnimation(context, index),
-        );
+      case CollectionAnimationType.listColored:
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildColorChangeAnimation(context, index));
       case CollectionAnimationType.stepAnimation:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) => _buildStepAnimation(context, index,),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildStepAnimation(context, index));
       case CollectionAnimationType.slideAndBounce:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildSlideAndBounceAnimation(context, index),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildSlideAndBounceAnimation(context, index));
       case CollectionAnimationType.fadeOut:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildScaleAndFadeAnimation(context, index),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildScaleAndFadeAnimation(context, index));
       case CollectionAnimationType.leftScaleAnimation:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation));
       case CollectionAnimationType.rightScaleAnimation:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation));
       case CollectionAnimationType.scaleLoad:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildScaleLoadAnimation(context, index,widget.animationDuration),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildScaleLoadAnimation(context, index,widget.animationDuration));
       default:
-        return ListView.builder(
-          itemCount: widget.itemCount,
-          itemBuilder: (context, index) =>
-              _buildScaleAndFadeAnimation(context, index),
-        );
+        return _buildListView(itemBuilder: (context, index) =>
+            _buildScaleAndFadeAnimation(context, index));
     }
+  }
+  Widget _buildListView({required Widget? Function(BuildContext context, int index) itemBuilder}){
+    return ListView.builder(
+        itemCount: widget.itemCount,
+        padding: widget.padding,
+        physics: widget.physics,
+        shrinkWrap: widget.shrinkWrap ?? false,
+        primary: widget.primary,
+        scrollDirection: widget.scrollDirection ?? Axis.vertical,
+        itemBuilder: itemBuilder
+    );
   }
 }

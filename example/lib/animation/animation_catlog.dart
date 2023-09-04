@@ -270,11 +270,11 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.colorChange)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.listColored)),
                       );
                     },
                     child: const Text(
-                      'Color Change Animation', textAlign: TextAlign.center,),
+                      'List Colored Animation', textAlign: TextAlign.center,),
                   ),
                 ),
                 Align(

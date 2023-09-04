@@ -23,11 +23,11 @@ class AnimatedGridView extends StatelessWidget {
           // animationDuration: Duration(seconds: 1),
           itemBuilder: (context, index) {
             return Card(
-              color: (collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.white: ColorUtility.magenta,
+              color: (collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.white: ColorUtility.magenta,
               child: Center(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
+                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
                 ),
               ),
             );

@@ -9,7 +9,7 @@ enum PathDirection {
   reverse,
 }
 enum CollectionAnimationType {
-  colorChange,
+  listColored,
   stepAnimation,
   fadeOut,
   slideAndBounce,
