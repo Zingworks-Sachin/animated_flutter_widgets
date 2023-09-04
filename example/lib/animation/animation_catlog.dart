@@ -1,8 +1,8 @@
 import 'package:animated_widgets/animated_widgets/appbars/fade_in_appbar.dart';
-import 'package:animated_widgets/animated_widgets/collection/animated_listview_builder.dart';
 import 'package:animated_widgets/animations/page_transition_animation.dart';
+import 'package:animated_widgets/enums/enums.dart';
 import 'package:example/animation/animations_example.dart';
-import 'package:example/page_transition/animated_list_view.dart';
+import 'package:example/animation/animated_list_view.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
 import 'package:flutter/material.dart';
@@ -177,11 +177,11 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType: ListItemAnimationType.scaleAndFade)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType: CollectionAnimationType.fadeOut)),
                       );
                     },
                     child: const Text(
-                      'Scale and Fade Animation', textAlign: TextAlign.center,),
+                      'Fade Out Animation', textAlign: TextAlign.center,),
                   ),
                 ),
                 Align(
@@ -193,7 +193,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.stepAnimation)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.stepAnimation)),
                       );
                     },
                     child: const Text('Step Animation', textAlign: TextAlign.center,),
@@ -208,7 +208,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.leftScaleAnimation)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScaleAnimation)),
                       );
                     },
                     child: const Text(
@@ -224,7 +224,23 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.rightScaleAnimation)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleLoad)),
+                      );
+                    },
+                    child: const Text(
+                      'Lazy Scale Animation', textAlign: TextAlign.center,),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: ColorUtility.magenta
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.rightScaleAnimation)),
                       );
                     },
                     child: const Text(
@@ -240,7 +256,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.colorChange)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.colorChange)),
                       );
                     },
                     child: const Text(
@@ -256,7 +272,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                     onPressed: () {
                       Navigator.push(
                         context,
-                        PopAndScaleTransition(page: const AnimatedListView(listItemAnimationType:ListItemAnimationType.slideAndBounce)),
+                        PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.slideAndBounce)),
                       );
                     },
                     child: const Text(

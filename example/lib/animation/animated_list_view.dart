@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 
 class AnimatedListView extends StatelessWidget {
-  final ListItemAnimationType listItemAnimationType;
-  const AnimatedListView({super.key, required this.listItemAnimationType});
+  final CollectionAnimationType collectionAnimationType;
+  const AnimatedListView({super.key, required this.collectionAnimationType});
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +19,14 @@ class AnimatedListView extends StatelessWidget {
         child: AnimatedListViewBuilder(
           itemCount: 25, // Change this to your desired item count
           customColor: ColorUtility.magenta,
-          animationType: listItemAnimationType,
+          animationType: collectionAnimationType,
           itemBuilder: (context, index) {
             return Card(
-              color: (listItemAnimationType == ListItemAnimationType.colorChange)?ColorUtility.white: ColorUtility.magenta,
+              color: (collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.white: ColorUtility.magenta,
               child: Center(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Item $index',style: TextStyle(color:(listItemAnimationType == ListItemAnimationType.colorChange)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
+                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.colorChange)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
                 ),
               ),
             );

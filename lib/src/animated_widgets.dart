@@ -17,6 +17,7 @@ export 'package:animated_widgets/widgets/painters/water_droplet_painter.dart';
 export 'package:animated_widgets/animations/circular_2d_animation.dart';
 export 'package:animated_widgets/animations/cube_3d_animation.dart';
 export 'package:animated_widgets/animated_widgets/collection/animated_listview_builder.dart';
+export 'package:animated_widgets/animated_widgets/collection/animated_gridview_builder.dart';
 import 'package:animated_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 

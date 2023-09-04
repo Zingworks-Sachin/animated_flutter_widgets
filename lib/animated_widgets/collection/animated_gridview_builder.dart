@@ -1,44 +1,49 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:animated_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 
-class AnimatedListViewBuilder extends StatefulWidget {
+class AnimatedGridViewBuilder extends StatefulWidget {
   final int itemCount;
   final IndexedWidgetBuilder itemBuilder;
   final CollectionAnimationType animationType;
   final Duration? animationDuration;
   final double itemDelay;
-  final Color? customColor;
-  final double? bounceAmplitude; // Custom color for colorChange
+  final Color? colorChangeHighlightColor;
+  final double? bounceAmplitude;
+  final int? delay; // Custom color for colorChange
 
-  const AnimatedListViewBuilder({super.key,
+  const AnimatedGridViewBuilder({super.key,
     required this.itemCount,
     required this.itemBuilder,
     this.animationType = CollectionAnimationType.fadeOut,
     this.animationDuration = const Duration(milliseconds: 500),
     this.itemDelay = 0.1,
     this.bounceAmplitude,
-    this.customColor, // Add custom color parameter for colorChange
+    this.colorChangeHighlightColor, // Add custom color parameter for colorChange
+    this.delay
   });
 
   @override
-  State<AnimatedListViewBuilder> createState() =>
-      _AnimatedListViewBuilderState();
+  State<AnimatedGridViewBuilder> createState() =>
+      _AnimatedGridViewBuilderState();
 }
 
-class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
+class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     with TickerProviderStateMixin {
   List<bool> _isVisibleList = [];
   late AnimationController _stepAnimationController;
   late AnimationController _leftRightScaleAnimationController;
   late AnimationController _scaleAndFadeAnimationController;
   late AnimationController _slideAndBounceAnimationController;
+  late AnimationController? _scaleLoadAnimationController;
 
   double screenWidth = 0.0;
 
   double screenHeight = 0.0;
 
   var startAnimation = false;
+
 
   @override
   void initState() {
@@ -65,6 +70,10 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       duration: widget.animationDuration,
       vsync: this,
     );
+    _scaleLoadAnimationController = AnimationController(
+      duration: widget.animationDuration,
+      vsync: this,
+    );
     _startAnimations();
   }
 
@@ -75,6 +84,8 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
     _leftRightScaleAnimationController.dispose();
     _scaleAndFadeAnimationController.dispose();
     _slideAndBounceAnimationController.dispose();
+    _scaleLoadAnimationController?.dispose();
+    _scaleLoadAnimationController = null;
     super.dispose();
   }
 
@@ -98,7 +109,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
   }
 
   Widget _buildColorChangeAnimation(BuildContext context, int index) {
-    final color = widget.customColor ?? Colors.transparent;
+    final color = widget.colorChangeHighlightColor ?? Colors.transparent;
     return AnimatedContainer(
       duration: widget.animationDuration ?? const Duration(milliseconds: 500),
       color: _isVisibleList[index] ? color : Colors.transparent,
@@ -106,7 +117,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
     );
   }
 
-  Widget _buildScaleAndFadeAnimation(BuildContext context, int index) {
+  Widget _buildFadeAnimation(BuildContext context, int index) {
     final double start = _isVisibleList[index] ? 1.0 : 0.0;
     final double end = _isVisibleList[index] ? 0.0 : 1.0;
 
@@ -231,46 +242,95 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
 
     switch (widget.animationType) {
       case CollectionAnimationType.colorChange:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
               _buildColorChangeAnimation(context, index),
         );
       case CollectionAnimationType.stepAnimation:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) => _buildStepAnimation(context, index,),
         );
       case CollectionAnimationType.slideAndBounce:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
               _buildSlideAndBounceAnimation(context, index),
         );
       case CollectionAnimationType.fadeOut:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
-              _buildScaleAndFadeAnimation(context, index),
+              _buildFadeAnimation(context, index),
         );
       case CollectionAnimationType.leftScaleAnimation:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
               _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScaleAnimation),
         );
       case CollectionAnimationType.rightScaleAnimation:
-        return ListView.builder(
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
               _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScaleAnimation),
         );
-      default:
-        return ListView.builder(
+      case CollectionAnimationType.scaleLoad:
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: widget.itemCount,
           itemBuilder: (context, index) =>
-              _buildScaleAndFadeAnimation(context, index),
+              _buildScaleLoadAnimation(context, index,widget.animationDuration),
+        );
+      default:
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+          itemCount: widget.itemCount,
+          itemBuilder: (context, index) =>
+              _buildFadeAnimation(context, index),
         );
     }
+  }
+
+  _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
+    if (_scaleLoadAnimationController != null){
+      Future.delayed(Duration(milliseconds: index * 1000), () {
+        _scaleLoadAnimationController?.forward();
+      });
+    }
+    return ScaleTransition(
+      scale: _scaleLoadAnimationController!.drive(
+        CurveTween(curve: Curves.easeInOut),
+      ),
+      child: FadeTransition(
+        opacity: _scaleLoadAnimationController!.drive(
+          CurveTween(curve: Curves.easeInOut),
+        ),
+        child: widget.itemBuilder(context, index), // Replace with your grid item widget
+      ),
+    );
   }
 }
