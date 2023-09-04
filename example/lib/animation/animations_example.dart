@@ -151,7 +151,7 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
               ),
               onPressed: () {
               },
-              child: const Text('Circular2DAnimation',textAlign: TextAlign.center,),
+              child: const Text('Circular 2D Animation',textAlign: TextAlign.center,),
             ),
           ),
         ];
