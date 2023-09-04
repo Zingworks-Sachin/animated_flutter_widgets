@@ -1,7 +1,9 @@
 name: animated_flutter_widgets
-description: A new Flutter package project.
+description: Elevate your Flutter app's user interface to a whole new level with 'animated_flutter_widgets'. This versatile package lets you effortlessly add mesmerizing animations to any widget while also offering a collection of pre-designed animated widgets for accelerated development.
 version: 0.0.1
-homepage:
+homepage: https://github.com/Zingworks-Sachin/animated_flutter_widgets
+repository: https://github.com/Zingworks-Sachin/animated_flutter_widgets
+issue_tracker: https://github.com/Zingworks-Sachin/animated_flutter_widgets/issues
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
