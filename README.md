@@ -49,51 +49,51 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 ## Usage
 ```dart
 /// To use these animations(Steady, Continuous & Tap Animations) wrap your widget inside the animation widgets
-SlideInAnimation(
- direction: Direction.right,
- duration: const Duration(seconds: 1),
- child: YourWidget()
-);
+    SlideInAnimation(
+     direction: Direction.right,
+     duration: const Duration(seconds: 1),
+     child: YourWidget()
+    );
 
-Cube3DAnimation(
- sideLength: 100,
- duration: const Duration(seconds: 4),
- isContinuous: true,
- child: YourWidget()
-);
+    Cube3DAnimation(
+     sideLength: 100,
+     duration: const Duration(seconds: 4),
+     isContinuous: true,
+     child: YourWidget()
+    );
 
-LongTapAnimation(
-// pressDuration: Duration(seconds: 0),
- child: YourWidget()
-);
+    LongTapAnimation(
+    // pressDuration: Duration(seconds: 0),
+     child: YourWidget()
+    );
 
 /// To use Animated ListView & GridView
-AnimatedListViewBuilder(
- itemCount: 25, // Change this to your desired item count
- customColor: ColorUtility.magenta, // Use this if you are using CollectionAnimationType.listColored
- animationType: CollectionAnimationType.leftScale, //Change this to your desired animation type
- itemBuilder: (context, index) {
-  return YourWidget()
- }
-);
+    AnimatedListViewBuilder(
+     itemCount: 25, // Change this to your desired item count
+     customColor: ColorUtility.magenta, // Use this if you are using CollectionAnimationType.listColored
+     animationType: CollectionAnimationType.leftScale, //Change this to your desired animation type
+     itemBuilder: (context, index) {
+      return YourWidget()
+     }
+    );
 
-AnimatedGridViewBuilder(
- itemCount: 25, // Change this to your desired item count
- animationType: CollectionAnimationType.scaleOut, //Change this to your desired animation type
- itemBuilder: (context, index) {
-  return YourWidget()
- }
-);
+    AnimatedGridViewBuilder(
+     itemCount: 25, // Change this to your desired item count
+     animationType: CollectionAnimationType.scaleOut, //Change this to your desired animation type
+     itemBuilder: (context, index) {
+      return YourWidget()
+     }
+    );
 
 /// To use Animated AppBar
-SlideInAnimatedAppBar(
- backgroundColor: ColorUtility.magenta,
- animationDuration: 1000,
- title: const Text('Second Page'),
-)
+    SlideInAnimatedAppBar(
+     backgroundColor: ColorUtility.magenta,
+     animationDuration: 1000,
+     title: const Text('Second Page'),
+    )
 
 /// To use Page Transition Animations
-Navigator.push(context,PopAndScaleTransition(page: YourPage()));
+  Navigator.push(context,PopAndScaleTransition(page: YourPage()));
 ```
 
 ## Example
