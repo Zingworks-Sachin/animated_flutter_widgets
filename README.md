@@ -20,15 +20,14 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 ## Features
 ### * Steady Animations
 ```dart
-/// Just wrap the widget to the animations
+/// To use these animations wrap your widget inside the animation widgets
 SlideInAnimation(
  direction: Direction.right,
  duration: const Duration(seconds: 1),
  child: YourWidget()
 );
 ```
-
-  [![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/steady_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/steady_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Continuous Animations
 
