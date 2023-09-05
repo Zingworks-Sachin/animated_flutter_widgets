@@ -3,6 +3,7 @@ import 'package:animated_flutter_widgets/animations/page_transition_animation.da
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/animation/animations_example.dart';
 import 'package:example/animation/animated_list_view.dart';
+import 'package:example/page_transition/second_page.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
 import 'package:example/utility/widgets/animated_dialog_box.dart';
@@ -103,6 +104,46 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             },
             child: const Text(
               'Animated GridView', textAlign: TextAlign.center,),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                backgroundColor: ColorUtility.magenta
+            ),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) =>  AnimatedDialogBox(title:"Select AppBar Animation",actions: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorUtility.magenta
+                      ),
+                      onPressed: () {
+                        PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.slideIn));
+                      },
+                      child: const Text(
+                        'Slide In Animated AppBar', textAlign: TextAlign.center,),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: ColorUtility.magenta
+                      ),
+                      onPressed: () {
+                        PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.fadeIn));
+                      },
+                      child: const Text(
+                        'Fade In Animated AppBar', textAlign: TextAlign.center,),
+                    ),
+                  ),
+                ], listType: null,),
+              );
+            },
+            child: const Text(
+              'Animated AppBar', textAlign: TextAlign.center,),
           ),
         ];
       });

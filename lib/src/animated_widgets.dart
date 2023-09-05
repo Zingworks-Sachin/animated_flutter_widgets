@@ -5,7 +5,6 @@ export 'package:animated_flutter_widgets/animations/image_color_change_animation
 export 'package:animated_flutter_widgets/animated_widgets/appbars/fade_in_appbar.dart';
 export 'package:animated_flutter_widgets/animated_widgets/appbars/slide_in_appbar.dart';
 export 'package:animated_flutter_widgets/animations/slide_in_animation.dart';
-export 'package:animated_flutter_widgets/animated_widgets/appbars/color_animated_appbar.dart';
 export 'package:animated_flutter_widgets/widgets/painters/star_painter.dart';
 export 'package:animated_flutter_widgets/widgets/painters/diamond_painter.dart';
 export 'package:animated_flutter_widgets/enums/enums.dart';

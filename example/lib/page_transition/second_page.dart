@@ -1,16 +1,17 @@
+import 'package:animated_flutter_widgets/animated_widgets/appbars/fade_in_appbar.dart';
+import 'package:animated_flutter_widgets/animated_widgets/appbars/slide_in_appbar.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 
 class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
+  final AppBarAnimationType? appBarAnimationType;
+  const SecondPage({super.key, this.appBarAnimationType});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorUtility.magenta,
-        title: const Text('Second Page'),
-      ),
+      appBar: getAppBar(),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -48,5 +49,27 @@ class SecondPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  getAppBar() {
+    switch (appBarAnimationType){
+      case AppBarAnimationType.fadeIn:
+        // TODO: Handle this case.
+        return FadeInAnimatedAppBar(
+          backgroundColor: ColorUtility.magenta,
+          title: const Text('Second Page'),
+        );
+      case AppBarAnimationType.slideIn:
+        // TODO: Handle this case.
+        return SlideInAnimatedAppBar(
+          backgroundColor: ColorUtility.magenta,
+          title: const Text('Second Page'),
+        );
+      default:
+        return AppBar(
+          backgroundColor: ColorUtility.magenta,
+          title: const Text('Second Page'),
+        );
+    }
   }
 }

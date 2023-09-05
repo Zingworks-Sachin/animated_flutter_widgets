@@ -31,10 +31,46 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         onPressed: () {
           Navigator.push(
             context,
-            RotateAnimation(page: const SecondPage(), isClockwise: true),
+            PopAndScaleTransition(page: const SecondPage()),
           );
         },
-        child: const Text('Rotation Transition',textAlign: TextAlign.center,),
+        child: const Text('Pop And Scale Transition',textAlign: TextAlign.center),
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: ColorUtility.magenta
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            FlippingRotationTransition(page: const SecondPage(),isReversed: false),
+          );
+        },
+        child: const Text('Flipping Rotation Transition',textAlign: TextAlign.center),
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: ColorUtility.magenta
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            RotationPageTransition(page: const SecondPage()),
+          );
+        },
+        child: const Text('Rotation Page Transition',textAlign: TextAlign.center),
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: ColorUtility.magenta
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            PendulumPageTransition(page: const SecondPage()),
+          );
+        },
+        child: const Text('Pendulum Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -67,18 +103,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         onPressed: () {
           Navigator.push(
             context,
-            RotationPageTransition(page: const SecondPage()),
-          );
-        },
-        child: const Text('Rotation Page Transition',textAlign: TextAlign.center),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
             OpacityScalePageTransition(page: const SecondPage()),
           );
         },
@@ -95,18 +119,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
           );
         },
         child: const Text('Zoom Out Page Transition',textAlign: TextAlign.center),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            PendulumPageTransition(page: const SecondPage()),
-          );
-        },
-        child: const Text('Pendulum Page Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -151,30 +163,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         onPressed: () {
           Navigator.push(
             context,
-            SwingPageTransition(page: const SecondPage()),
-          );
-        },
-        child: const Text('Swing Page Transition',textAlign: TextAlign.center),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            PopAndScaleTransition(page: const SecondPage()),
-          );
-        },
-        child: const Text('Pop And Scale Transition',textAlign: TextAlign.center),
-      ),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
             ShrinkAndFadeTransition(page: const SecondPage()),
           );
         },
@@ -193,18 +181,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         child: const Text('Elastic Rotation Transition',textAlign: TextAlign.center),
       ),
       ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: ColorUtility.magenta
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            FlippingRotationTransition(page: const SecondPage(),isReversed: false),
-          );
-        },
-        child: const Text('Flipping Rotation Transition',textAlign: TextAlign.center),
-      ),
-      ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: ColorUtility.magenta),
         onPressed:() {
           Navigator.push(
@@ -213,6 +189,18 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
           );
         },
         child: const Text('Scale Slide Transition',textAlign: TextAlign.center),
+      ),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            backgroundColor: ColorUtility.magenta
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            RotateAnimation(page: const SecondPage(), isClockwise: true),
+          );
+        },
+        child: const Text('Rotation Transition',textAlign: TextAlign.center,),
       ),
     ];
     setState(() {

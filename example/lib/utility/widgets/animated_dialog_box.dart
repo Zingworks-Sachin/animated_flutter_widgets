@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class AnimatedDialogBox extends StatefulWidget {
   final String title;
-  final ListType listType;
+  final ListType? listType;
   final TextStyle? titleTextStyle;
   final List<Widget>? actions;
 
@@ -57,7 +57,7 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                 titleTextStyle: TextStyle(color: ColorUtility.magenta,fontSize: 22,fontWeight: FontWeight.bold),
                 alignment: Alignment.center,
                 actionsAlignment: MainAxisAlignment.spaceBetween,
-                actions: <Widget>[
+                actions: widget.actions ?? <Widget>[
                   Align(
                     alignment: Alignment.center,
                     child: ElevatedButton(

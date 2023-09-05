@@ -17,3 +17,7 @@ enum CollectionAnimationType {
   rightScale,
   scaleOut
 }
+enum AppBarAnimationType {
+  fadeIn,
+  slideIn
+}
