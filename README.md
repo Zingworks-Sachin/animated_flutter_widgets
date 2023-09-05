@@ -16,6 +16,7 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 - Web
 - MacOS
 - Windows
+- Linux
 
 ## Features
 ### * Steady Animations
@@ -93,7 +94,7 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
     )
 
 /// To use Page Transition Animations
-  Navigator.push(context,PopAndScaleTransition(page: YourPage()));
+    Navigator.push(context,PopAndScaleTransition(page: YourPage()));
 ```
 
 ## Example

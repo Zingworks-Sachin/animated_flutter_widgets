@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A utility class for creating an animated color change image.
 class ImageColorChangeAnimationUtility {
+  /// Creates an animated color change image widget.
   static Widget animatedColorImage({
     required String imagePath,
     required Color initialColor,
@@ -47,7 +49,7 @@ class _ColorChangeAnimationWidgetState
 
   void _startColorChangeLoop() {
     Future.delayed(widget.duration, () {
-      if (mounted){
+      if (mounted) {
         setState(() {
           _showImage = !_showImage;
           _currentColorIndex =

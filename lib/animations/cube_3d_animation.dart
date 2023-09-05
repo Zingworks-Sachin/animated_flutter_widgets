@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+/// A StatefulWidget that applies a 3D cube animation to its child widget.
 class Cube3DAnimation extends StatefulWidget {
   final Widget child;
   final double sideLength;
   final Duration duration;
   final bool isContinuous;
 
+  /// Constructor for the Cube3DAnimation widget.
   const Cube3DAnimation({
+    super.key,
     required this.child,
     this.sideLength = 100,
     this.duration = const Duration(seconds: 4),
@@ -15,7 +18,7 @@ class Cube3DAnimation extends StatefulWidget {
   });
 
   @override
-  _Cube3DAnimationState createState() => _Cube3DAnimationState();
+  State<Cube3DAnimation> createState() => _Cube3DAnimationState();
 }
 
 class _Cube3DAnimationState extends State<Cube3DAnimation>
@@ -26,11 +29,14 @@ class _Cube3DAnimationState extends State<Cube3DAnimation>
   @override
   void initState() {
     super.initState();
+
+    // Initialize the animation controller
     _controller = AnimationController(
       vsync: this,
       duration: widget.duration,
     );
 
+    // Create a rotation animation
     _animation = Tween<double>(
       begin: 0,
       end: 2 * math.pi,
@@ -45,6 +51,7 @@ class _Cube3DAnimationState extends State<Cube3DAnimation>
 
   @override
   void dispose() {
+    /// Dispose of the animation controller
     _controller.dispose();
     super.dispose();
   }

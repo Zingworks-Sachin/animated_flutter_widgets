@@ -1,33 +1,36 @@
-import 'package:animated_flutter_widgets/enums/enums.dart';
+import 'package:animated_flutter_widgets/enums/enums.dart'; // Import necessary dependencies.
 import 'package:flutter/material.dart';
 
+/// A widget that animates its child along a specified path.
 class PathAnimation extends StatefulWidget {
-  final Widget child;
-  final Path path;
-  final Duration duration;
-  final bool reversePath;
-  final PathDirection direction;
+  final Widget child;            /// The widget to be animated along the path.
+  final Path path;               /// The path along which the child will be animated.
+  final Duration duration;       /// The duration of the animation.
+  final bool reversePath;       /// Whether to reverse the animation path.
+  final PathDirection direction; /// The direction of the path animation.
 
-  const PathAnimation({super.key,
+  /// Constructor for the PathAnimation widget.
+  const PathAnimation({
+    Key? key,
     required this.child,
     required this.path,
     this.duration = const Duration(seconds: 3),
     this.reversePath = false,
     this.direction = PathDirection.forward,
-  });
+  }) : super(key: key);
 
   @override
-  _PathAnimationState createState() => _PathAnimationState();
+  State<PathAnimation> createState() => _PathAnimationState();
 }
 
-class _PathAnimationState extends State<PathAnimation>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+class _PathAnimationState extends State<PathAnimation> with SingleTickerProviderStateMixin {
+  late AnimationController _controller; /// Controller for managing the animation.
+  late Animation<double> _animation;    /// Animation object for tracking animation progress.
 
   @override
   void initState() {
     super.initState();
+    /// Initialize the animation controller with the specified duration.
     _controller = AnimationController(
       vsync: this,
       duration: widget.duration,
@@ -39,6 +42,7 @@ class _PathAnimationState extends State<PathAnimation>
     double startValue;
     double endValue;
 
+    /// Determine the start and end values for the animation based on direction.
     if (widget.direction == PathDirection.forward) {
       startValue = 0.0;
       endValue = pathLength;
@@ -59,10 +63,11 @@ class _PathAnimationState extends State<PathAnimation>
       ).animate(_controller);
     }
 
+    /// Add a listener to the animation controller to handle animation status.
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         if (widget.reversePath) {
-          _controller.reverse();
+          _controller.reverse(); /// Reverse the animation if reversePath is true.
         } else {
           _controller.reset();
           _controller.forward();
@@ -72,11 +77,13 @@ class _PathAnimationState extends State<PathAnimation>
       }
     });
 
+    /// Start the animation.
     _controller.forward();
   }
 
   @override
   void dispose() {
+    /// Dispose of the animation controller when the widget is removed.
     _controller.dispose();
     super.dispose();
   }
@@ -88,6 +95,7 @@ class _PathAnimationState extends State<PathAnimation>
       builder: (context, child) {
         final pathMetric = widget.path.computeMetrics().single;
         final currentPosition = pathMetric.getTangentForOffset(_animation.value)!.position;
+        /// Translate the child widget along the path using the current position.
         return Transform.translate(
           offset: Offset(currentPosition.dx, currentPosition.dy),
           child: child,

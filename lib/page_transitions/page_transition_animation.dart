@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+/// Slide left page transition animation
 class SlideLeftPageAnimation<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -20,6 +20,8 @@ class SlideLeftPageAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Fade page transition animation
 class FadePageAnimation<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -34,6 +36,8 @@ class FadePageAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Rotation page transition animation
 class RotationPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -68,6 +72,8 @@ class RotationPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Opacity and scale page transition animation
 class OpacityScalePageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -114,6 +120,8 @@ class OpacityScalePageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Zoom out page transition animation with background blur
 class ZoomOutPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -157,6 +165,8 @@ class ZoomOutPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Pendulum page transition animation
 class PendulumPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -177,12 +187,17 @@ class PendulumPageTransition<T> extends PageRouteBuilder<T> {
       ).animate(animation);
 
       return Transform.translate(
-        offset: Offset(offsetAnimation.value.dx, offsetAnimation.value.dy + pendulumAnimation.value * math.sin(animation.value * math.pi)),
+        offset: Offset(
+          offsetAnimation.value.dx,
+          offsetAnimation.value.dy + pendulumAnimation.value * math.sin(animation.value * math.pi),
+        ),
         child: child,
       );
     },
   );
 }
+
+/// Blink page transition animation
 class BlinkPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -196,7 +211,7 @@ class BlinkPageTransition<T> extends PageRouteBuilder<T> {
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
       final offsetAnimation = animation.drive(tween);
 
-      const blinkDuration = Duration(milliseconds: 200); // Adjust the blink duration as desired
+      // const blinkDuration = Duration(milliseconds: 200); // Adjust the blink duration as desired
       const blinkInterval = Interval(0.0, 0.2, curve: Curves.easeInOut);
 
       final isBlinking = animation.value >= blinkInterval.begin && animation.value <= blinkInterval.end;
@@ -217,6 +232,8 @@ class BlinkPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Zoom and rotate page transition animation
 class ZoomRotatePageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -256,6 +273,8 @@ class ZoomRotatePageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Ripple page transition animation
 class RipplePageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -293,6 +312,8 @@ class RipplePageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Swing page transition animation
 class SwingPageTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -322,6 +343,8 @@ class SwingPageTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Custom clipper for radial reveal animation
 class RadialClipper extends CustomClipper<Rect> {
   final double revealFraction;
 
@@ -339,6 +362,8 @@ class RadialClipper extends CustomClipper<Rect> {
     return true;
   }
 }
+
+/// Pop and scale page transition animation
 class PopAndScaleTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -385,6 +410,8 @@ class PopAndScaleTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Shrink and fade page transition animation
 class ShrinkAndFadeTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -421,6 +448,8 @@ class ShrinkAndFadeTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Elastic rotation page transition animation
 class ElasticRotationTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
 
@@ -457,6 +486,8 @@ class ElasticRotationTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
+
+/// Flipping rotation page transition animation
 class FlippingRotationTransition<T> extends PageRouteBuilder<T> {
   final Widget page;
   final bool isReversed;
@@ -497,15 +528,19 @@ class FlippingRotationTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class ScaleSlideTransition<T> extends PageRouteBuilder<T> {
-  final Widget page;
-  final bool isLeftScaled;
 
+/// A custom page transition that combines scaling and sliding effects.
+class ScaleSlideTransition<T> extends PageRouteBuilder<T> {
+  final Widget page;        /// The page widget to transition to.
+  final bool isLeftScaled;  /// Determines whether to scale from the left or right.
+
+  /// Constructor for the ScaleSlideTransition class.
   ScaleSlideTransition({required this.page, required this.isLeftScaled})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final begin = isLeftScaled ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0);
+      final begin =
+      isLeftScaled ? const Offset(1.0, 0.0) : const Offset(-1.0, 0.0);
       const end = Offset.zero;
       const curve = Curves.easeInOut;
       final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
@@ -532,10 +567,13 @@ class ScaleSlideTransition<T> extends PageRouteBuilder<T> {
     },
   );
 }
-class RotateAnimation<T> extends PageRouteBuilder<T> {
-  final Widget page;
-  final bool isClockwise;
 
+/// A custom page transition that applies a rotation animation.
+class RotateAnimation<T> extends PageRouteBuilder<T> {
+  final Widget page;        /// The page widget to transition to.
+  final bool isClockwise;   /// Determines the direction of rotation.
+
+  /// Constructor for the RotateAnimation class.
   RotateAnimation({required this.page, required this.isClockwise})
       : super(
     pageBuilder: (context, animation, secondaryAnimation) => page,
@@ -558,22 +596,3 @@ class RotateAnimation<T> extends PageRouteBuilder<T> {
     },
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

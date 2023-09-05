@@ -1,4 +1,4 @@
-import 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
+import 'package:animated_flutter_widgets/page_transitions/page_transition_animation.dart';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/animation/animated_grid_view.dart';
 import 'package:example/animation/animated_list_view.dart';
@@ -25,21 +25,21 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
 
   @override
   void initState() {
-    // TODO: implement initState
+    /// TODO: implement initState
     super.initState();
-    // Initialize the animation controller
+    /// Initialize the animation controller
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
 
-    // Create a curved animation
+    /// Create a curved animation
     _animation = CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
     );
 
-    // Start the animation
+    /// Start the animation
     _controller.forward();
   }
   @override
@@ -68,12 +68,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.bounce)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.bounce)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.bounce)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.bounce)),
                           );
                         }
                       },
@@ -91,12 +91,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType: CollectionAnimationType.fadeOut)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType: ScrollWidgetAnimationType.fadeOut)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType: CollectionAnimationType.fadeOut)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType: ScrollWidgetAnimationType.fadeOut)),
                           );
                         }
                       },
@@ -114,12 +114,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.scaleOut)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.scaleOut)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.scaleOut)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.scaleOut)),
                           );
                         }
                       },
@@ -137,12 +137,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.waterFall)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.waterFall)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.waterFall)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.waterFall)),
                           );
                         }
                       },
@@ -159,12 +159,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.leftScale)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.leftScale)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.leftScale)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.leftScale)),
                           );
                         }
                       },
@@ -182,12 +182,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.rightScale)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.rightScale)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.rightScale)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.rightScale)),
                           );
                         }
                       },
@@ -205,12 +205,12 @@ class _AnimatedDialogBoxState extends State<AnimatedDialogBox> with TickerProvid
                         if(widget.listType == ListType.listView){
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedListView(collectionAnimationType:CollectionAnimationType.listColored)),
+                            PopAndScaleTransition(page: const AnimatedListView(scrollWidgetAnimationType:ScrollWidgetAnimationType.listColored)),
                           );
                         }else {
                           Navigator.push(
                             context,
-                            PopAndScaleTransition(page: const AnimatedGridView(collectionAnimationType:CollectionAnimationType.listColored)),
+                            PopAndScaleTransition(page: const AnimatedGridView(scrollWidgetAnimationType:ScrollWidgetAnimationType.listColored)),
                           );
                         }
                       },

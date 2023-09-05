@@ -56,14 +56,7 @@ class StarPainter extends CustomPainter {
       );
 
       final maxWidth = size.width - 2 * innerRadius;
-      final maxHeight = size.height - 2 * innerRadius;
-
       textPainter.layout(maxWidth: maxWidth);
-
-      final fontSize = math.min(
-        fontSizeRatio * innerRadius,
-        math.min(maxWidth / textPainter.width, maxHeight / textPainter.height),
-      );
 
       final textX = centerX - textPainter.width / 2;
       final textY = centerY - textPainter.height / 2;

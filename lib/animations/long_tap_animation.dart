@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+/// A StatefulWidget that applies a long tap animation to its child widget.
 class LongTapAnimation extends StatefulWidget {
   final Widget child;
   final double pressedScale;
 
-  const LongTapAnimation({super.key,
+  /// Constructor for the LongTapAnimation widget.
+  const LongTapAnimation({
+    super.key,
     required this.child,
     this.pressedScale = 0.9,
   });
@@ -12,6 +15,7 @@ class LongTapAnimation extends StatefulWidget {
   @override
   State<LongTapAnimation> createState() => _LongTapAnimationState();
 }
+
 class _LongTapAnimationState extends State<LongTapAnimation> {
   bool _isPressed = false;
 
@@ -41,4 +45,3 @@ class _LongTapAnimationState extends State<LongTapAnimation> {
     );
   }
 }
-

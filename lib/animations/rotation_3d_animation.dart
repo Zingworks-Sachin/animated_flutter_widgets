@@ -2,14 +2,16 @@ import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+/// A widget that applies a 3D rotation animation to its child.
 class Rotation3DAnimation extends StatefulWidget {
-  final Widget child;
-  final double angle;
-  final Duration duration;
-  final Direction direction;
-  final bool isContinuous;
-  final bool isHalfRotation;
+  final Widget child;           /// The widget to be animated.
+  final double angle;           /// The rotation angle in radians.
+  final Duration duration;      /// The duration of the rotation animation.
+  final Direction direction;    /// The direction of rotation.
+  final bool isContinuous;     /// Whether the animation should be continuous.
+  final bool isHalfRotation;   /// Whether to perform a half rotation.
 
+  /// Constructor for the Rotation3DAnimation widget.
   const Rotation3DAnimation({
     Key? key,
     required this.child,
@@ -28,8 +30,8 @@ class Rotation3DAnimation extends StatefulWidget {
 }
 class _Rotation3DAnimationState extends State<Rotation3DAnimation>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
+  late AnimationController _controller;  /// Controller for managing the animation.
+  late Animation<double> _animation;     /// Animation object for tracking animation progress.
 
   @override
   void initState() {
@@ -73,6 +75,7 @@ class _Rotation3DAnimationState extends State<Rotation3DAnimation>
     return AnimatedBuilder(
       animation: _animation,
       builder: (context, child) {
+        // Apply the specified 3D rotation transformation based on the direction.
         if (widget.direction == Direction.up) {
           return Transform(
             alignment: Alignment.center,
@@ -113,4 +116,3 @@ class _Rotation3DAnimationState extends State<Rotation3DAnimation>
     );
   }
 }
-

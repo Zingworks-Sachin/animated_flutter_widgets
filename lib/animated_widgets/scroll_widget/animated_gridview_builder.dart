@@ -3,40 +3,48 @@ import 'dart:ui';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:flutter/material.dart';
 
+/// A widget for creating a grid view with various scroll animations applied to its items.
 class AnimatedGridViewBuilder extends StatefulWidget {
-  final int itemCount;
-  final IndexedWidgetBuilder itemBuilder;
-  final CollectionAnimationType animationType;
-  final Duration? animationDuration;
-  final double itemDelay;
-  final Color? colorChangeHighlightColor;
-  final double? bounceAmplitude;
-  final SliverGridDelegate? gridDelegate;
-  final SliverChildDelegate? childrenDelegate;
-  final int? delay;
-  final Axis? scrollDirection;
-  final ScrollController? controller;
-  final bool? reverse;
-  final bool? primary;
-  final bool? shrinkWrap;
-  final ScrollPhysics? physics;
-  final EdgeInsetsGeometry? padding;
-
+  final int itemCount;                 /// The total number of items in the grid.
+  final IndexedWidgetBuilder itemBuilder;  /// The builder function for individual grid items.
+  final ScrollWidgetAnimationType animationType; /// The type of animation to apply to the items.
+  final Duration? animationDuration;  /// Duration of the animation.
+  final double itemDelay;             /// Delay between item animations.
+  final Color? colorChangeHighlightColor;  /// Color used for highlighting during color change animation.
+  final double? bounceAmplitude;      /// Amplitude of bounce animation.
+  final SliverGridDelegate? gridDelegate; /// Delegate for grid layout.
+  final SliverChildDelegate? childrenDelegate; /// Delegate for grid children.
+  final int? delay;                   /// Delay before starting animations.
+  final Axis? scrollDirection;        /// The direction in which the grid scrolls.
+  final ScrollController? controller; /// Controller for the scroll behavior.
+  final bool? reverse;               /// Reverse the scroll direction.
+  final bool? primary;               /// Set as the primary scroll view.
+  final bool? shrinkWrap;            /// Shrink-wrap the grid.
+  final ScrollPhysics? physics;      /// Physics for the scroll view.
+  final EdgeInsetsGeometry? padding; /// Padding for the grid view.
 
   const AnimatedGridViewBuilder({super.key,
     required this.itemCount,
     required this.itemBuilder,
-    this.animationType = CollectionAnimationType.fadeOut,
+    this.animationType = ScrollWidgetAnimationType.fadeOut,
     this.animationDuration = const Duration(milliseconds: 500),
     this.itemDelay = 0.1,
     this.bounceAmplitude,
-    this.colorChangeHighlightColor, // Add custom color parameter for colorChange
-    this.delay, this.gridDelegate, this.childrenDelegate, this.scrollDirection, this.controller, this.reverse, this.primary, this.shrinkWrap, this.physics, this.padding
+    this.colorChangeHighlightColor,
+    this.delay,
+    this.gridDelegate,
+    this.childrenDelegate,
+    this.scrollDirection,
+    this.controller,
+    this.reverse,
+    this.primary,
+    this.shrinkWrap,
+    this.physics,
+    this.padding,
   });
 
   @override
-  State<AnimatedGridViewBuilder> createState() =>
-      _AnimatedGridViewBuilderState();
+  State<AnimatedGridViewBuilder> createState() => _AnimatedGridViewBuilderState();
 }
 
 class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
@@ -49,11 +57,8 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
   late AnimationController? _scaleLoadAnimationController;
 
   double screenWidth = 0.0;
-
   double screenHeight = 0.0;
-
   var startAnimation = false;
-
 
   @override
   void initState() {
@@ -63,7 +68,10 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
         startAnimation = true;
       });
     });
+    /// Generate the array for visible items
     _isVisibleList = List.generate(widget.itemCount, (index) => false);
+
+    /// Initialize all the animation controllers
     _stepAnimationController = AnimationController(
       duration: widget.animationDuration,
       vsync: this,
@@ -84,6 +92,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       duration: widget.animationDuration,
       vsync: this,
     );
+    /// To start the gridView animation
     _startAnimations();
   }
 
@@ -97,6 +106,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     _scaleLoadAnimationController = null;
     super.dispose();
   }
+
   void _startAnimations() {
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted) {
@@ -115,6 +125,8 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       }
     });
   }
+
+  /// Build method for the color change animation.
   Widget _buildColorChangeAnimation(BuildContext context, int index) {
     final color = widget.colorChangeHighlightColor ?? Colors.transparent;
     return AnimatedContainer(
@@ -124,6 +136,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     );
   }
 
+  /// Build method for the fade animation.
   Widget _buildFadeAnimation(BuildContext context, int index) {
     final double start = _isVisibleList[index] ? 1.0 : 0.0;
     final double end = _isVisibleList[index] ? 0.0 : 1.0;
@@ -153,6 +166,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     );
   }
 
+  /// Build method for the slide and bounce animation.
   Widget _buildSlideAndBounceAnimation(BuildContext context, int index) {
     final double start = _isVisibleList[index] ? -1.0 : 0.0;
     final double end = _isVisibleList[index] ? 0.0 : 1.0;
@@ -181,6 +195,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     );
   }
 
+  /// Build method for the step animation.
   Widget _buildStepAnimation(BuildContext context, int index) {
     return AnimatedBuilder(
       animation: _stepAnimationController,
@@ -201,11 +216,13 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     );
   }
 
-  Widget _buildLeftAndRightScaleAnimation(BuildContext context, int index, CollectionAnimationType listItemAnimationType, ) {
+  /// Build method for the left and right scale animation.
+  Widget _buildLeftAndRightScaleAnimation(BuildContext context, int index,
+      ScrollWidgetAnimationType listItemAnimationType) {
     final screenWidth = MediaQuery.of(context).size.width;
     final startAnimation = _isVisibleList[index];
     Tween(
-      begin:  1.0,
+      begin: 1.0,
       end: 0.0,
     ).animate(_leftRightScaleAnimationController);
 
@@ -218,13 +235,12 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       animation: _leftRightScaleAnimationController,
       builder: (context, child) {
         return AnimatedContainer(
-          // height: 55,
           width: screenWidth,
           curve: Curves.easeInOut,
           duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
-          transform: (listItemAnimationType == CollectionAnimationType.rightScale)?
-          Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0)
-              :Matrix4.translationValues(translationX.toDouble(), 0, 0), // Updated translation
+          transform: (listItemAnimationType == ScrollWidgetAnimationType.rightScale)
+              ? Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0)
+              : Matrix4.translationValues(translationX.toDouble(), 0, 0), // Updated translation
           margin: const EdgeInsets.only(
             bottom: 12,
           ),
@@ -241,8 +257,11 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       child: widget.itemBuilder(context, index),
     );
   }
-  Widget _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
-    if (_scaleLoadAnimationController != null){
+
+  /// Build method for the scale load animation.
+  Widget _buildScaleLoadAnimation(BuildContext context, int index,
+      Duration? animationDuration) {
+    if (_scaleLoadAnimationController != null) {
       Future.delayed(Duration(milliseconds: index * 1000), () {
         _scaleLoadAnimationController?.forward();
       });
@@ -266,21 +285,21 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
     screenWidth = MediaQuery.of(context).size.width;
 
     switch (widget.animationType) {
-      case CollectionAnimationType.listColored:
+      case ScrollWidgetAnimationType.listColored:
         return _buildGridView(itemBuilder: (context, index) => _buildColorChangeAnimation(context, index,));
-      case CollectionAnimationType.waterFall:
+      case ScrollWidgetAnimationType.waterFall:
         return _buildGridView(itemBuilder: (context, index) => _buildStepAnimation(context, index,));
-      case CollectionAnimationType.bounce:
+      case ScrollWidgetAnimationType.bounce:
         return _buildGridView(itemBuilder: (context, index) => _buildSlideAndBounceAnimation(context, index));
-      case CollectionAnimationType.fadeOut:
+      case ScrollWidgetAnimationType.fadeOut:
         return _buildGridView(itemBuilder: (context, index) => _buildFadeAnimation(context, index));
-      case CollectionAnimationType.leftScale:
+      case ScrollWidgetAnimationType.leftScale:
         return _buildGridView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.leftScale));
-      case CollectionAnimationType.rightScale:
+            _buildLeftAndRightScaleAnimation(context, index,ScrollWidgetAnimationType.leftScale));
+      case ScrollWidgetAnimationType.rightScale:
         return _buildGridView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,CollectionAnimationType.rightScale),);
-      case CollectionAnimationType.scaleOut:
+            _buildLeftAndRightScaleAnimation(context, index,ScrollWidgetAnimationType.rightScale),);
+      case ScrollWidgetAnimationType.scaleOut:
         return _buildGridView(itemBuilder: (context, index) =>
             _buildScaleLoadAnimation(context, index,widget.animationDuration));
       default:
@@ -288,6 +307,8 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
             _buildFadeAnimation(context, index));
     }
   }
+
+  /// Helper method for building the grid view with specified item builder.
   Widget _buildGridView({required Widget? Function(BuildContext context, int index) itemBuilder}){
     return GridView.builder(
       gridDelegate: widget.gridDelegate ?? const SliverGridDelegateWithFixedCrossAxisCount(
@@ -299,8 +320,7 @@ class _AnimatedGridViewBuilderState extends State<AnimatedGridViewBuilder>
       shrinkWrap: widget.shrinkWrap ?? false,
       primary: widget.primary,
       scrollDirection: widget.scrollDirection ?? Axis.vertical,
-      itemBuilder: itemBuilder
-          // (itemBuilder ?? _buildFadeAnimation(context, index)),
+      itemBuilder: itemBuilder,
     );
   }
 }

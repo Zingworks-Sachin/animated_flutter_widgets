@@ -5,8 +5,14 @@ import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedListView extends StatelessWidget {
-  final CollectionAnimationType collectionAnimationType;
-  const AnimatedListView({super.key, required this.collectionAnimationType});
+  ///Type of animation for the list view
+  final ScrollWidgetAnimationType scrollWidgetAnimationType;
+
+  ///Constructor
+  const AnimatedListView({
+    super.key,
+    required this.scrollWidgetAnimationType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,20 +24,30 @@ class AnimatedListView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AnimatedListViewBuilder(
-          itemCount: 25, // Change this to your desired item count
+          itemCount: 25, ///Change this to your desired item count
           customColor: ColorUtility.magenta,
-          animationType: collectionAnimationType,
+          animationType: scrollWidgetAnimationType,
           itemBuilder: (context, index) {
             return Card(
-              color: (collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.white: ColorUtility.magenta,
+              color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                  ? ColorUtility.white
+                  : ColorUtility.magenta,
               child: Center(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
+                  title: Text(
+                    'Item $index',
+                    style: TextStyle(
+                      color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                          ? ColorUtility.magenta
+                          : ColorUtility.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             );
-          }, // Use the custom animation
+          }, ///Use the custom animation
         ),
       ),
     );

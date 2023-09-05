@@ -4,10 +4,15 @@ import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
 
-
 class AnimatedGridView extends StatelessWidget {
-  final CollectionAnimationType collectionAnimationType;
-  const AnimatedGridView({super.key, required this.collectionAnimationType});
+  ///Type of animation for the grid view
+  final ScrollWidgetAnimationType scrollWidgetAnimationType;
+
+  ///Constructor
+  const AnimatedGridView({
+    super.key,
+    required this.scrollWidgetAnimationType,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +26,29 @@ class AnimatedGridView extends StatelessWidget {
         child: AnimatedGridViewBuilder(
           itemCount: 25,
           colorChangeHighlightColor: ColorUtility.magenta,
-          animationType: collectionAnimationType,
-          // animationDuration: Duration(seconds: 1),
+          animationType: scrollWidgetAnimationType,
+          ///animationDuration: Duration(seconds: 1),
           itemBuilder: (context, index) {
             return Card(
-              color: (collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.white: ColorUtility.magenta,
+              color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                  ? ColorUtility.white
+                  : ColorUtility.magenta,
               child: Center(
                 child: ListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Item $index',style: TextStyle(color:(collectionAnimationType == CollectionAnimationType.listColored)?ColorUtility.magenta: ColorUtility.white),textAlign: TextAlign.center,),
+                  title: Text(
+                    'Item $index',
+                    style: TextStyle(
+                      color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                          ? ColorUtility.magenta
+                          : ColorUtility.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             );
-          }, // Use the custom animation
+          }, ///Use the custom animation
         ),
       ),
     );

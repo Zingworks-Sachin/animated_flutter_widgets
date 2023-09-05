@@ -1,5 +1,5 @@
 import 'package:animated_flutter_widgets/animated_widgets/appbars/slide_in_appbar.dart';
-import 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
+import 'package:animated_flutter_widgets/page_transitions/page_transition_animation.dart';
 import 'package:example/page_transition/second_page.dart';
 import 'package:example/utility/color.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +21,9 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widgetList = [
+      /// Pop And Scale Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -36,6 +36,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Pop And Scale Transition',textAlign: TextAlign.center),
       ),
+      /// Flipping Rotation Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -48,6 +49,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Flipping Rotation Transition',textAlign: TextAlign.center),
       ),
+      /// Rotation Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -60,6 +62,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Rotation Page Transition',textAlign: TextAlign.center),
       ),
+      /// Pendulum Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -72,6 +75,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Pendulum Page Transition',textAlign: TextAlign.center),
       ),
+      /// Slide Left Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -84,6 +88,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Slide Left Page Transition',textAlign: TextAlign.center),
       ),
+      /// Fade Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -96,6 +101,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Fade Page Transition',textAlign: TextAlign.center),
       ),
+      /// Opacity Scale Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -108,6 +114,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Opacity Scale Page Transition',textAlign: TextAlign.center),
       ),
+      /// Zoom Out Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -120,6 +127,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Zoom Out Page Transition',textAlign: TextAlign.center),
       ),
+      /// Blink Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -132,6 +140,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Blink Page Transition',textAlign: TextAlign.center),
       ),
+      /// Zoom Rotate Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -144,6 +153,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Zoom Rotate Page Transition',textAlign: TextAlign.center),
       ),
+      /// Ripple Page Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -156,6 +166,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Ripple Page Transition',textAlign: TextAlign.center),
       ),
+      /// Shrink And Fade Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -168,6 +179,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Shrink And Fade Transition',textAlign: TextAlign.center),
       ),
+      /// Elastic Rotation Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -180,6 +192,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Elastic Rotation Transition',textAlign: TextAlign.center),
       ),
+      /// Scale Slide Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(backgroundColor: ColorUtility.magenta),
         onPressed:() {
@@ -190,6 +203,7 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
         },
         child: const Text('Scale Slide Transition',textAlign: TextAlign.center),
       ),
+      /// Rotation Transition
       ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: ColorUtility.magenta
@@ -209,7 +223,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Page Transition Example'),backgroundColor: ColorUtility.magenta,),
       appBar: SlideInAnimatedAppBar(
         title: const Text('Page Transition Catlog'),
         animationDuration: 1000,
@@ -224,7 +237,6 @@ class _PageTransitionAnimationWidgetState extends State<PageTransitionAnimationW
             gridDelegate:
             const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              // childAspectRatio: 0.76,
               crossAxisSpacing: 18,
               mainAxisSpacing: 12,
             ),

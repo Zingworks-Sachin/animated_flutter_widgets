@@ -1,20 +1,22 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
+/// A custom animated app bar that fades in when it appears.
 class FadeInAnimatedAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final double? minHeight;
-  final double? maxHeight;
-  final Widget? title;
-  final Color? backgroundColor;
-  final double animationDuration;
+  final double? minHeight;          /// The minimum height of the app bar.
+  final double? maxHeight;          /// The maximum height of the app bar.
+  final Widget? title;              /// The title widget of the app bar.
+  final Color? backgroundColor;     /// The background color of the app bar.
+  final double animationDuration;    /// The duration of the fade-in animation.
 
+  /// Constructor for the FadeInAnimatedAppBar widget.
   const FadeInAnimatedAppBar({
     Key? key,
     this.minHeight,
     this.maxHeight,
     this.title,
     this.backgroundColor,
-    this.animationDuration = 300,
+    this.animationDuration = 300,    /// Default animation duration is 300 milliseconds.
   }) : super(key: key);
 
   @override
@@ -52,7 +54,7 @@ class _FadeInAnimatedAppBarState extends State<FadeInAnimatedAppBar>
       setState(() {});
     });
 
-    _controller.forward();
+    _controller.forward();  /// Start the fade-in animation.
   }
 
   @override
@@ -64,13 +66,13 @@ class _FadeInAnimatedAppBarState extends State<FadeInAnimatedAppBar>
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: widget.backgroundColor ?? Colors.blue,
+      color: widget.backgroundColor ?? Colors.blue,  /// Set the background color or use default blue.
       height: lerpDouble(widget.minHeight ?? kToolbarHeight,
-          widget.maxHeight ?? kToolbarHeight * 2, _controller.value),
+          widget.maxHeight ?? kToolbarHeight * 2, _controller.value),  /// Interpolate height based on animation value.
       child: AppBar(
         title: Opacity(
-          opacity: _fadeAnimation.value,
-          child: widget.title ?? Text('Default Title'),
+          opacity: _fadeAnimation.value,  /// Apply opacity animation to the title.
+          child: widget.title ?? const Text('Default Title'),  /// Display the provided title or a default one.
         ),
         elevation: 0.0,
         backgroundColor: Colors.transparent,

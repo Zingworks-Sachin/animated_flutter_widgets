@@ -8,8 +8,9 @@ void main() {
   runApp(const MyApp());
 }
 
+/// The main application widget for the Flutter app.
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,40 +20,53 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/// The main widget that displays animations in the app.
 class Animations extends StatelessWidget {
   const Animations({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: ColorUtility.magenta,title: const Text("Animation Widget Example",)),
+      appBar: AppBar(
+        backgroundColor: ColorUtility.magenta,
+        title: const Text("Animation Widget Example"),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // SlideInAnimation for Page Transition Animations button
             SlideInAnimation(
               direction: Direction.down,
               duration: const Duration(seconds: 1),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorUtility.magenta
+                  backgroundColor: ColorUtility.magenta,
                 ),
                 onPressed: () {
                   Navigator.push(
                     context,
-                    ScaleSlideTransition(page: const PageTransitionAnimationWidget(), isLeftScaled: false),
+                    ScaleSlideTransition(
+                      page: const PageTransitionAnimationWidget(),
+                      isLeftScaled: false,
+                    ),
                   );
                 },
-                child: const Text('Page Transition Animations',style: TextStyle(color: Colors.white),),
+                child: const Text(
+                  'Page Transition Animations',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
+
+            // SlideInAnimation for Animations button
             SlideInAnimation(
               direction: Direction.up,
               duration: const Duration(seconds: 1),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorUtility.magenta
+                  backgroundColor: ColorUtility.magenta,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -60,9 +74,12 @@ class Animations extends StatelessWidget {
                     PopAndScaleTransition(page: const AnimationCatlog()),
                   );
                 },
-                child: const Text('Animations',style: TextStyle(color: Colors.white),),
+                child: const Text(
+                  'Animations',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

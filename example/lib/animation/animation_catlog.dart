@@ -1,8 +1,7 @@
 import 'package:animated_flutter_widgets/animated_widgets/appbars/fade_in_appbar.dart';
-import 'package:animated_flutter_widgets/animations/page_transition_animation.dart';
+import 'package:animated_flutter_widgets/page_transitions/page_transition_animation.dart';
 import 'package:animated_flutter_widgets/enums/enums.dart';
 import 'package:example/animation/animations_example.dart';
-import 'package:example/animation/animated_list_view.dart';
 import 'package:example/page_transition/second_page.dart';
 import 'package:example/utility/color.dart';
 import 'package:example/utility/enums.dart';
@@ -20,21 +19,19 @@ class AnimationCatlog extends StatefulWidget {
 class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderStateMixin{
   List<Widget> widgetList = [];
   late AnimationController _controller;
-  late Animation<double> _animation;
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _controller.dispose();
   }
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (mounted) {
       setState(() {
         widgetList = [
+          /// Steady Animation Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -49,6 +46,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             },
             child: const Text('Steady Animation', textAlign: TextAlign.center,),
           ),
+          /// Continuous Animation Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -64,6 +62,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             child: const Text(
               'Continuous Animation', textAlign: TextAlign.center,),
           ),
+          /// Button Tap Animation Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -79,6 +78,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             child: const Text(
               'Button Tap Animation', textAlign: TextAlign.center,),
           ),
+          /// Animated ListView Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -92,6 +92,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             child: const Text(
               'Animated ListView', textAlign: TextAlign.center,),
           ),
+          /// Animated GridView Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -105,6 +106,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
             child: const Text(
               'Animated GridView', textAlign: TextAlign.center,),
           ),
+          /// Animated AppBar Button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
                 backgroundColor: ColorUtility.magenta
@@ -121,7 +123,7 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                       ),
                       onPressed: () {
                         Navigator.push(
-                          context,
+                            context,
                             PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.slideIn))
                         );
                       },
@@ -162,7 +164,6 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Page Transition Example'),backgroundColor: ColorUtility.magenta,),
       appBar: FadeInAnimatedAppBar(
         title: const Text('Animation Catlog'),
         animationDuration: 1000,
