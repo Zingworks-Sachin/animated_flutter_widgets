@@ -46,14 +46,29 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 
 [![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_app_bar.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
-##Usage
+## Usage
 ```dart
-/// To use these animations wrap your widget inside the animation widgets
+/// To use these animations(Steady, Continuous & Tap Animations) wrap your widget inside the animation widgets
 SlideInAnimation(
  direction: Direction.right,
  duration: const Duration(seconds: 1),
  child: YourWidget()
 );
+
+Cube3DAnimation(
+ sideLength: 100,
+ duration: const Duration(seconds: 4),
+ isContinuous: true,
+ child: YourWidget()
+);
+
+LongPressTapAnimation(
+// pressDuration: Duration(seconds: 0),
+ child: YourWidget()
+);
+
+/// To use these animations(Steady & Continuous) wrap your widget inside the animation widgets
+
 ```
 
 ## Example
