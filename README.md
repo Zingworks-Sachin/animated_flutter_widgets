@@ -28,7 +28,13 @@ Elevate your Flutter app's user interface to a whole new level with 'animated_fl
 
 ### * Page Transition Animations
 ### * Button Tap Animations
+
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/button_tap_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+
 ### * Animated ListViews
+
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_list_view.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+
 ### * Animated GridViews
 ### * Animated AppBars
 
