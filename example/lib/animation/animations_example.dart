@@ -319,7 +319,7 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
       case AnimationType.buttonTap:
       // TODO: Handle this case.
         widgetList = [
-          LongPressTapAnimation(
+          LongTapAnimation(
             // pressDuration: Duration(seconds: 0),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -329,8 +329,6 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
               },
               child: const Text('Long Press Me'),
             ),
-            // duration: Duration(milliseconds: 200),
-            // scaleValue: 0.95,
           ),
           ButtonTapAnimation(
             duration: const Duration(milliseconds: 300),

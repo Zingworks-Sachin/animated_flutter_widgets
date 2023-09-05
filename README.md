@@ -62,13 +62,38 @@ Cube3DAnimation(
  child: YourWidget()
 );
 
-LongPressTapAnimation(
+LongTapAnimation(
 // pressDuration: Duration(seconds: 0),
  child: YourWidget()
 );
 
-/// To use these animations(Steady & Continuous) wrap your widget inside the animation widgets
+/// To use Animated ListView & GridView
+AnimatedListViewBuilder(
+ itemCount: 25, // Change this to your desired item count
+ customColor: ColorUtility.magenta, // Use this if you are using CollectionAnimationType.listColored
+ animationType: CollectionAnimationType.leftScale, //Change this to your desired animation type
+ itemBuilder: (context, index) {
+  return YourWidget()
+ }
+);
 
+AnimatedGridViewBuilder(
+ itemCount: 25, // Change this to your desired item count
+ animationType: CollectionAnimationType.scaleOut, //Change this to your desired animation type
+ itemBuilder: (context, index) {
+  return YourWidget()
+ }
+);
+
+/// To use Animated AppBar
+SlideInAnimatedAppBar(
+ backgroundColor: ColorUtility.magenta,
+ animationDuration: 1000,
+ title: const Text('Second Page'),
+)
+
+/// To use Page Transition Animations
+Navigator.push(context,PopAndScaleTransition(page: YourPage()));
 ```
 
 ## Example

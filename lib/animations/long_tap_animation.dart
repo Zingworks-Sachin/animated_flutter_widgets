@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class LongPressTapAnimation extends StatefulWidget {
+class LongTapAnimation extends StatefulWidget {
   final Widget child;
   final double pressedScale;
 
-  const LongPressTapAnimation({super.key,
+  const LongTapAnimation({super.key,
     required this.child,
     this.pressedScale = 0.9,
   });
 
   @override
-  State<LongPressTapAnimation> createState() => _LongPressTapAnimationState();
+  State<LongTapAnimation> createState() => _LongTapAnimationState();
 }
-class _LongPressTapAnimationState extends State<LongPressTapAnimation> {
+class _LongTapAnimationState extends State<LongTapAnimation> {
   bool _isPressed = false;
 
   void _onPressed() {

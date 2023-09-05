@@ -11,7 +11,7 @@ export 'package:animated_flutter_widgets/enums/enums.dart';
 export 'package:animated_flutter_widgets/animations/rotation_3d_animation.dart';
 export 'package:animated_flutter_widgets/animations/button_tap_animation.dart';
 export 'package:animated_flutter_widgets/animations/double_tap_animation.dart';
-export 'package:animated_flutter_widgets/animations/longpress_button_tap_animation.dart';
+export 'package:animated_flutter_widgets/animations/long_tap_animation.dart';
 export 'package:animated_flutter_widgets/widgets/painters/water_droplet_painter.dart';
 export 'package:animated_flutter_widgets/animations/circular_2d_animation.dart';
 export 'package:animated_flutter_widgets/animations/cube_3d_animation.dart';
