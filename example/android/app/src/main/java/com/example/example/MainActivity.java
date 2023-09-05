@@ -1,4 +1,4 @@
-package com.example.example;
+package in.zingworks.animatedflutterwidgets;
 
 import io.flutter.embedding.android.FlutterActivity;
 

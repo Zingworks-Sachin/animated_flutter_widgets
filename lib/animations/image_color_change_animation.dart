@@ -64,20 +64,15 @@ class _ColorChangeAnimationWidgetState
   Widget build(BuildContext context) {
     Color currentColor = widget.colorArray[_currentColorIndex];
 
-    return GestureDetector(
-      onTap: () {}, // Empty onTap to prevent accidental taps
-      child: AnimatedContainer(
-        duration: widget.duration,
-        curve: Curves.easeInOut,
-        width: _showImage ? 200 : 0,
-        height: _showImage ? 200 : 0,
-        child: ColorFiltered(
-          colorFilter: ColorFilter.mode(
-            currentColor,
-            BlendMode.color,
-          ),
-          child: Image.asset(widget.imagePath),
+    return AnimatedContainer(
+      duration: widget.duration,
+      curve: Curves.easeInOut,
+      child: ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          currentColor,
+          BlendMode.color
         ),
+        child: Image.asset(widget.imagePath),
       ),
     );
   }

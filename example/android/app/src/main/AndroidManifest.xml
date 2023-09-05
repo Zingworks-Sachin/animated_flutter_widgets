@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.example">
+    package="in.zingworks.animatedflutterwidgets">
    <application
         android:label="example"
         android:name="${applicationName}"
