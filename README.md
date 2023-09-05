@@ -106,5 +106,5 @@ Check out the [example](https://github.com/Zingworks-Sachin/animated_flutter_wid
 ## Issues and feedback
 If you have any suggestions for including a feature or if something doesn't work, feel free to open a Github [issue](https://github.com/Zingworks-Sachin/animated_flutter_widgets/issues) or to open a [pull request](https://github.com/Zingworks-Sachin/animated_flutter_widgets/pulls), you are more than welcome to contribute!
 
-## Contributor
+## Author
 - Sachin Pandit ([ZingWorks LLP](https://zingworks.in/))
