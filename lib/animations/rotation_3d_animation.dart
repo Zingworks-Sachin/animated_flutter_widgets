@@ -4,12 +4,24 @@ import 'dart:math' as math;
 
 /// A widget that applies a 3D rotation animation to its child.
 class Rotation3DAnimation extends StatefulWidget {
-  final Widget child;           /// The widget to be animated.
-  final double angle;           /// The rotation angle in radians.
-  final Duration duration;      /// The duration of the rotation animation.
-  final Direction direction;    /// The direction of rotation.
-  final bool isContinuous;     /// Whether the animation should be continuous.
-  final bool isHalfRotation;   /// Whether to perform a half rotation.
+  final Widget child;
+
+  /// The widget to be animated.
+  final double angle;
+
+  /// The rotation angle in radians.
+  final Duration duration;
+
+  /// The duration of the rotation animation.
+  final Direction direction;
+
+  /// The direction of rotation.
+  final bool isContinuous;
+
+  /// Whether the animation should be continuous.
+  final bool isHalfRotation;
+
+  /// Whether to perform a half rotation.
 
   /// Constructor for the Rotation3DAnimation widget.
   const Rotation3DAnimation({
@@ -21,17 +33,21 @@ class Rotation3DAnimation extends StatefulWidget {
     this.isContinuous = false,
     this.isHalfRotation = false,
   })  : assert(!(isContinuous && isHalfRotation),
-  "isContinuous and isHalfRotation cannot be both true"),
+            "isContinuous and isHalfRotation cannot be both true"),
         super(key: key);
 
   @override
-  State<Rotation3DAnimation> createState() =>
-      _Rotation3DAnimationState();
+  State<Rotation3DAnimation> createState() => _Rotation3DAnimationState();
 }
+
 class _Rotation3DAnimationState extends State<Rotation3DAnimation>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;  /// Controller for managing the animation.
-  late Animation<double> _animation;     /// Animation object for tracking animation progress.
+  late AnimationController _controller;
+
+  /// Controller for managing the animation.
+  late Animation<double> _animation;
+
+  /// Animation object for tracking animation progress.
 
   @override
   void initState() {

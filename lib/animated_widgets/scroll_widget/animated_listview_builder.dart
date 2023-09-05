@@ -61,7 +61,9 @@ class AnimatedListViewBuilder extends StatefulWidget {
     this.primary,
     this.shrinkWrap,
     this.physics,
-    this.padding, /// Add custom color parameter for colorChange
+    this.padding,
+
+    /// Add custom color parameter for colorChange
   });
 
   @override
@@ -141,7 +143,7 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
         for (int i = 0; i < widget.itemCount; i++) {
           Future.delayed(
             Duration(milliseconds: (i * widget.itemDelay * 1000).toInt()),
-                () {
+            () {
               if (mounted) {
                 setState(() {
                   _isVisibleList[i] = true;
@@ -188,7 +190,8 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
           scale: value,
           child: AnimatedOpacity(
             opacity: value ?? 0,
-            duration: widget.animationDuration ?? const Duration(milliseconds: 500),
+            duration:
+                widget.animationDuration ?? const Duration(milliseconds: 500),
             child: child,
           ),
         );
@@ -205,7 +208,9 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
     return AnimatedBuilder(
       animation: CurvedAnimation(
         parent: (_slideAndBounceAnimationController..forward()),
-        curve: Curves.bounceOut, /// Use a bounce easing curve
+        curve: Curves.bounceOut,
+
+        /// Use a bounce easing curve
       ),
       builder: (context, child) {
         final double? value = lerpDouble(
@@ -236,12 +241,16 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
       builder: (context, child) {
         return Visibility(
           visible: _isVisibleList[index],
-          maintainState: false, /// You can adjust this as per your needs
+          maintainState: false,
+
+          /// You can adjust this as per your needs
           maintainAnimation: false,
           child: AnimatedContainer(
-            duration: widget.animationDuration ?? const Duration(milliseconds: 500),
+            duration:
+                widget.animationDuration ?? const Duration(milliseconds: 500),
             constraints: _isVisibleList[index]
-                ? const BoxConstraints(minHeight: 0.0, maxHeight: double.infinity)
+                ? const BoxConstraints(
+                    minHeight: 0.0, maxHeight: double.infinity)
                 : const BoxConstraints(minHeight: 0.0, maxHeight: 0),
             child: widget.itemBuilder(context, index),
           ),
@@ -252,12 +261,14 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
 
   /// Builds an animation with left or right scaling
   Widget _buildLeftAndRightScaleAnimation(
-      BuildContext context, int index,
-      ScrollWidgetAnimationType listItemAnimationType, ) {
+    BuildContext context,
+    int index,
+    ScrollWidgetAnimationType listItemAnimationType,
+  ) {
     final screenWidth = MediaQuery.of(context).size.width;
     final startAnimation = _isVisibleList[index];
     Tween(
-      begin:  1.0,
+      begin: 1.0,
       end: 0.0,
     ).animate(_leftRightScaleAnimationController);
 
@@ -272,10 +283,15 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
         return AnimatedContainer(
           width: screenWidth,
           curve: Curves.easeInOut,
-          duration: widget.animationDuration ?? Duration(milliseconds: 200 + (index * 200)),
-          transform: (listItemAnimationType == ScrollWidgetAnimationType.rightScale)?
-          Matrix4.translationValues(startAnimation ? 0 : screenWidth, 0, 0)
-              :Matrix4.translationValues(translationX.toDouble(), 0, 0), /// Updated translation
+          duration: widget.animationDuration ??
+              Duration(milliseconds: 200 + (index * 200)),
+          transform:
+              (listItemAnimationType == ScrollWidgetAnimationType.rightScale)
+                  ? Matrix4.translationValues(
+                      startAnimation ? 0 : screenWidth, 0, 0)
+                  : Matrix4.translationValues(translationX.toDouble(), 0, 0),
+
+          /// Updated translation
           margin: const EdgeInsets.only(
             bottom: 12,
           ),
@@ -294,8 +310,12 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
   }
 
   /// Builds an animation with scaling effect
-  Widget _buildScaleLoadAnimation(BuildContext context, int index, Duration? animationDuration,) {
-    if (_scaleLoadAnimationController != null){
+  Widget _buildScaleLoadAnimation(
+    BuildContext context,
+    int index,
+    Duration? animationDuration,
+  ) {
+    if (_scaleLoadAnimationController != null) {
       /// Delayed start for animations
       Future.delayed(Duration(milliseconds: index * 1000), () {
         _scaleLoadAnimationController?.forward();
@@ -309,7 +329,9 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
         opacity: _scaleLoadAnimationController!.drive(
           CurveTween(curve: Curves.easeInOut),
         ),
-        child: widget.itemBuilder(context, index), /// Replace with your grid item widget
+        child: widget.itemBuilder(context, index),
+
+        /// Replace with your grid item widget
       ),
     );
   }
@@ -321,34 +343,44 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
 
     switch (widget.animationType) {
       case ScrollWidgetAnimationType.listColored:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildColorChangeAnimation(context, index));
+        return _buildListView(
+            itemBuilder: (context, index) =>
+                _buildColorChangeAnimation(context, index));
       case ScrollWidgetAnimationType.waterFall:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildStepAnimation(context, index));
+        return _buildListView(
+            itemBuilder: (context, index) =>
+                _buildStepAnimation(context, index));
       case ScrollWidgetAnimationType.bounce:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildSlideAndBounceAnimation(context, index));
+        return _buildListView(
+            itemBuilder: (context, index) =>
+                _buildSlideAndBounceAnimation(context, index));
       case ScrollWidgetAnimationType.fadeOut:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildScaleAndFadeAnimation(context, index));
+        return _buildListView(
+            itemBuilder: (context, index) =>
+                _buildScaleAndFadeAnimation(context, index));
       case ScrollWidgetAnimationType.leftScale:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,ScrollWidgetAnimationType.leftScale));
+        return _buildListView(
+            itemBuilder: (context, index) => _buildLeftAndRightScaleAnimation(
+                context, index, ScrollWidgetAnimationType.leftScale));
       case ScrollWidgetAnimationType.rightScale:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildLeftAndRightScaleAnimation(context, index,ScrollWidgetAnimationType.rightScale));
+        return _buildListView(
+            itemBuilder: (context, index) => _buildLeftAndRightScaleAnimation(
+                context, index, ScrollWidgetAnimationType.rightScale));
       case ScrollWidgetAnimationType.scaleOut:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildScaleLoadAnimation(context, index,widget.animationDuration));
+        return _buildListView(
+            itemBuilder: (context, index) => _buildScaleLoadAnimation(
+                context, index, widget.animationDuration));
       default:
-        return _buildListView(itemBuilder: (context, index) =>
-            _buildScaleAndFadeAnimation(context, index));
+        return _buildListView(
+            itemBuilder: (context, index) =>
+                _buildScaleAndFadeAnimation(context, index));
     }
   }
 
   /// Builds the ListView with the specified item builder
-  Widget _buildListView({required Widget? Function(BuildContext context, int index) itemBuilder}){
+  Widget _buildListView(
+      {required Widget? Function(BuildContext context, int index)
+          itemBuilder}) {
     return ListView.builder(
         itemCount: widget.itemCount,
         padding: widget.padding,
@@ -356,7 +388,6 @@ class _AnimatedListViewBuilderState extends State<AnimatedListViewBuilder>
         shrinkWrap: widget.shrinkWrap ?? false,
         primary: widget.primary,
         scrollDirection: widget.scrollDirection ?? Axis.vertical,
-        itemBuilder: itemBuilder
-    );
+        itemBuilder: itemBuilder);
   }
 }

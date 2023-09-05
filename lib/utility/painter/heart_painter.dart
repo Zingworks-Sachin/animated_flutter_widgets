@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 /// A custom painter for drawing a heart shape.
 class HeartPainter extends CustomPainter {
-  final Color? color;   /// The color of the heart shape (optional).
+  final Color? color;
+
+  /// The color of the heart shape (optional).
 
   /// Constructor for the HeartPainter class.
   HeartPainter(this.color);
@@ -10,8 +12,12 @@ class HeartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = color ?? Colors.red   /// Set the paint color to the specified color or default to red.
-      ..style = PaintingStyle.fill;   /// Set the paint style to fill.
+      ..color = color ?? Colors.red
+
+      /// Set the paint color to the specified color or default to red.
+      ..style = PaintingStyle.fill;
+
+    /// Set the paint style to fill.
 
     final path = Path();
 
@@ -49,6 +55,8 @@ class HeartPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;  /// This custom painter does not require repainting.
+    return false;
+
+    /// This custom painter does not require repainting.
   }
 }

@@ -39,7 +39,8 @@ class _LongTapAnimationState extends State<LongTapAnimation> {
       onTapCancel: () => _onReleased(),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
-        transform: Matrix4.identity()..scale(_isPressed ? widget.pressedScale : 1.0),
+        transform: Matrix4.identity()
+          ..scale(_isPressed ? widget.pressedScale : 1.0),
         child: widget.child,
       ),
     );

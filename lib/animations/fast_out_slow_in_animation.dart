@@ -15,8 +15,7 @@ class FastOutSlowInAnimation extends StatefulWidget {
   });
 
   @override
-  State<FastOutSlowInAnimation> createState() =>
-      _FastOutSlowInAnimationState();
+  State<FastOutSlowInAnimation> createState() => _FastOutSlowInAnimationState();
 }
 
 class _FastOutSlowInAnimationState extends State<FastOutSlowInAnimation>
@@ -66,7 +65,9 @@ class _FastOutSlowInAnimationState extends State<FastOutSlowInAnimation>
         animation: _animation,
         builder: (context, child) {
           return Transform.scale(
-            scale: 1 + _animation.value * (widget.scale ?? 0.9), // Adjust the scale factor
+            scale: 1 +
+                _animation.value *
+                    (widget.scale ?? 0.9), // Adjust the scale factor
             child: child,
           );
         },

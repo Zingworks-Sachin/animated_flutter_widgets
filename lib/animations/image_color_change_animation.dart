@@ -68,10 +68,7 @@ class _ColorChangeAnimationWidgetState
       duration: widget.duration,
       curve: Curves.easeInOut,
       child: ColorFiltered(
-        colorFilter: ColorFilter.mode(
-          currentColor,
-          BlendMode.color
-        ),
+        colorFilter: ColorFilter.mode(currentColor, BlendMode.color),
         child: Image.asset(widget.imagePath),
       ),
     );

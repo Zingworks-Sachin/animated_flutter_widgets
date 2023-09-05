@@ -27,10 +27,12 @@ class AnimatedGridView extends StatelessWidget {
           itemCount: 25,
           colorChangeHighlightColor: ColorUtility.magenta,
           animationType: scrollWidgetAnimationType,
+
           ///animationDuration: Duration(seconds: 1),
           itemBuilder: (context, index) {
             return Card(
-              color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+              color: (scrollWidgetAnimationType ==
+                      ScrollWidgetAnimationType.listColored)
                   ? ColorUtility.white
                   : ColorUtility.magenta,
               child: Center(
@@ -39,7 +41,8 @@ class AnimatedGridView extends StatelessWidget {
                   title: Text(
                     'Item $index',
                     style: TextStyle(
-                      color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                      color: (scrollWidgetAnimationType ==
+                              ScrollWidgetAnimationType.listColored)
                           ? ColorUtility.magenta
                           : ColorUtility.white,
                     ),
@@ -48,7 +51,9 @@ class AnimatedGridView extends StatelessWidget {
                 ),
               ),
             );
-          }, ///Use the custom animation
+          },
+
+          ///Use the custom animation
         ),
       ),
     );

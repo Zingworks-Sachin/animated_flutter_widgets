@@ -24,12 +24,15 @@ class AnimatedListView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AnimatedListViewBuilder(
-          itemCount: 25, ///Change this to your desired item count
+          itemCount: 25,
+
+          ///Change this to your desired item count
           customColor: ColorUtility.magenta,
           animationType: scrollWidgetAnimationType,
           itemBuilder: (context, index) {
             return Card(
-              color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+              color: (scrollWidgetAnimationType ==
+                      ScrollWidgetAnimationType.listColored)
                   ? ColorUtility.white
                   : ColorUtility.magenta,
               child: Center(
@@ -38,7 +41,8 @@ class AnimatedListView extends StatelessWidget {
                   title: Text(
                     'Item $index',
                     style: TextStyle(
-                      color: (scrollWidgetAnimationType == ScrollWidgetAnimationType.listColored)
+                      color: (scrollWidgetAnimationType ==
+                              ScrollWidgetAnimationType.listColored)
                           ? ColorUtility.magenta
                           : ColorUtility.white,
                     ),
@@ -47,7 +51,9 @@ class AnimatedListView extends StatelessWidget {
                 ),
               ),
             );
-          }, ///Use the custom animation
+          },
+
+          ///Use the custom animation
         ),
       ),
     );

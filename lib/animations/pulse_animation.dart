@@ -2,16 +2,24 @@ import 'package:flutter/material.dart';
 
 /// A widget that applies a pulsating scale animation to its child.
 class PulseAnimation extends StatefulWidget {
-  final Widget child;           /// The widget to be animated.
-  final double beginScale;      /// The initial scale of the child.
-  final Duration duration;      /// The duration of the pulsating animation.
+  final Widget child;
+
+  /// The widget to be animated.
+  final double beginScale;
+
+  /// The initial scale of the child.
+  final Duration duration;
+
+  /// The duration of the pulsating animation.
 
   /// Constructor for the PulseAnimation widget.
   const PulseAnimation({
     Key? key,
     required this.child,
     this.beginScale = 1.0,
-    this.duration = const Duration(milliseconds: 1000),  /// Default animation duration.
+    this.duration = const Duration(milliseconds: 1000),
+
+    /// Default animation duration.
   }) : super(key: key);
 
   @override
@@ -20,12 +28,17 @@ class PulseAnimation extends StatefulWidget {
 
 class _PulseAnimationState extends State<PulseAnimation>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;  /// Controller for managing the animation.
-  late Animation<double> _animation;     /// Animation object for tracking animation progress.
+  late AnimationController _controller;
+
+  /// Controller for managing the animation.
+  late Animation<double> _animation;
+
+  /// Animation object for tracking animation progress.
 
   @override
   void initState() {
     super.initState();
+
     /// Initialize the animation controller.
     _controller = AnimationController(
       vsync: this,

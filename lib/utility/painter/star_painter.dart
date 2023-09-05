@@ -47,13 +47,12 @@ class StarPainter extends CustomPainter {
 
     if (centerText != null && centerTextStyle != null) {
       final textPainter = TextPainter(
-        text: TextSpan(
-          text: centerText,
-          style: centerTextStyle,
-        ),
-        textDirection: TextDirection.ltr,
-        textAlign: TextAlign.center
-      );
+          text: TextSpan(
+            text: centerText,
+            style: centerTextStyle,
+          ),
+          textDirection: TextDirection.ltr,
+          textAlign: TextAlign.center);
 
       final maxWidth = size.width - 2 * innerRadius;
       textPainter.layout(maxWidth: maxWidth);
