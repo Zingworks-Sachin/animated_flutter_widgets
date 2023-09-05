@@ -120,7 +120,10 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                           backgroundColor: ColorUtility.magenta
                       ),
                       onPressed: () {
-                        PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.slideIn));
+                        Navigator.push(
+                          context,
+                            PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.slideIn))
+                        );
                       },
                       child: const Text(
                         'Slide In Animated AppBar', textAlign: TextAlign.center,),
@@ -133,13 +136,15 @@ class _AnimationCatlogState extends State<AnimationCatlog> with TickerProviderSt
                           backgroundColor: ColorUtility.magenta
                       ),
                       onPressed: () {
-                        PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.fadeIn));
-                      },
+                        Navigator.push(
+                            context,
+                            PopAndScaleTransition(page:  const SecondPage(appBarAnimationType:AppBarAnimationType.fadeIn))
+                        );                      },
                       child: const Text(
                         'Fade In Animated AppBar', textAlign: TextAlign.center,),
                     ),
                   ),
-                ], listType: null,),
+                ], ),
               );
             },
             child: const Text(

@@ -51,18 +51,21 @@ class SecondPage extends StatelessWidget {
     );
   }
 
-  getAppBar() {
+  PreferredSizeWidget getAppBar() {
+    print("appBarAnimationType->$appBarAnimationType");
     switch (appBarAnimationType){
       case AppBarAnimationType.fadeIn:
         // TODO: Handle this case.
         return FadeInAnimatedAppBar(
           backgroundColor: ColorUtility.magenta,
+          animationDuration: 1000,
           title: const Text('Second Page'),
         );
       case AppBarAnimationType.slideIn:
         // TODO: Handle this case.
         return SlideInAnimatedAppBar(
           backgroundColor: ColorUtility.magenta,
+          animationDuration: 1000,
           title: const Text('Second Page'),
         );
       default:

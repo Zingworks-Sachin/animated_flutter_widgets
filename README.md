@@ -44,6 +44,8 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 
 ### * Animated AppBars
 
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_app_bar.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+
 ## Example
 Check out the [example](https://github.com/Zingworks-Sachin/animated_flutter_widgets/tree/main/example)
 

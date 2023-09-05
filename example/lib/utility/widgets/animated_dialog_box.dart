@@ -13,7 +13,7 @@ class AnimatedDialogBox extends StatefulWidget {
   final TextStyle? titleTextStyle;
   final List<Widget>? actions;
 
-  const AnimatedDialogBox({Key? key, required this.title, this.titleTextStyle, required this.listType, this.actions}) : super(key: key);
+  const AnimatedDialogBox({Key? key, required this.title, this.titleTextStyle, this.listType, this.actions}) : super(key: key);
 
   @override
   State<AnimatedDialogBox> createState() => _AnimatedDialogBoxState();
