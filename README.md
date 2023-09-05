@@ -21,31 +21,31 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 ## Features
 ### * Steady Animations
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/steady_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/steady_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Continuous Animations
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/continous_animations.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/continous_animations.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Page Transition Animations
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/page_transition_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/page_transition_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Button Tap Animations
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/button_tap_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/button_tap_animation.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Animated ListViews
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_list_view.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/animated_list_view.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Animated GridViews
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_grid_view.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/animated_grid_view.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ### * Animated AppBars
 
-[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/blob/main/assets/animated_app_bar.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
+[![screen](https://github.com/Zingworks-Sachin/animated_flutter_widgets/raw/main/assets/animated_app_bar.gif)](https://github.com/Zingworks-Sachin/animated_flutter_widgets)
 
 ## Usage
 ```dart
