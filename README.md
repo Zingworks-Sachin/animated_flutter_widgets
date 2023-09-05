@@ -19,7 +19,6 @@ Elevate your Flutter app's user interface to a whole new level with [animated_fl
 
 ## Features
 ### * Steady Animations
-### Usage
 ```dart
 /// Just wrap the widget to the animations
 SlideInAnimation(
