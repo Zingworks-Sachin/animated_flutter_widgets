@@ -23,8 +23,7 @@ class ButtonTapAnimation extends StatefulWidget {
   /// [onTapUp] is a callback function to be executed when a tap-up event is detected.
   ///
   /// [onTapDown] is an optional callback function to be executed when a tap-down event is detected.
-  const ButtonTapAnimation({
-    Key? key,
+  const ButtonTapAnimation({super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 200),
     this.scaleValue = 0.5,
