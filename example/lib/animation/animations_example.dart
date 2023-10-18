@@ -417,12 +417,18 @@ class _AnimationExampleWidgetState extends State<AnimationExampleWidget> {
           /// Button Tap Animation
           ButtonTapAnimation(
             duration: const Duration(milliseconds: 300),
-            scaleValue: 0.95,
+            scaleValue: 0.5,
+            onTapUp: () {},
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorUtility.magenta),
-              onPressed: () {},
-              child: const Text('Tap Me'),
+                backgroundColor: ColorUtility.magenta,
+                disabledBackgroundColor: ColorUtility.magenta,
+              ),
+              onPressed: null,
+              child: Text(
+                'Tap Me',
+                style: TextStyle(color: ColorUtility.white),
+              ),
             ),
           ),
 
